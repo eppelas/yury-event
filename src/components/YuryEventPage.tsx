@@ -419,9 +419,9 @@ export default function YuryEventPage() {
              <div className="flex flex-wrap gap-8">
                 <div 
                   className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
-                  onClick={() => setActiveVideo("yQSvOz0p5ts")}
+                  onClick={() => setActiveVideo("STTUYBhyOsM")}
                 >
-                  <img src={`https://img.youtube.com/vi/yQSvOz0p5ts/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi Camp 2023" />
+                  <img src={`https://img.youtube.com/vi/STTUYBhyOsM/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi Camp 2023" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
@@ -438,9 +438,9 @@ export default function YuryEventPage() {
 
                 <div 
                   className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
-                  onClick={() => setActiveVideo("LocnrbflD5w")}
+                  onClick={() => setActiveVideo("tJ0IKAsBeQA")}
                 >
-                  <img src={`https://img.youtube.com/vi/LocnrbflD5w/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi ru RC4" />
+                  <img src={`https://img.youtube.com/vi/tJ0IKAsBeQA/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi ru RC4" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
