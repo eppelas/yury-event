@@ -48,7 +48,9 @@ const Header = ({ setIsMenuOpen }: { setIsMenuOpen: (v: boolean) => void }) => (
     </div>
 
     <div className="flex items-center gap-8">
-      <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase">
+      <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
+        <a href="#en" className="hover:opacity-60 transition-opacity">EN</a>
+        <div className="w-[1px] h-4 bg-black/20" />
         <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Связаться с нами</a>
         <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Забронировать</a>
       </div>
@@ -263,8 +265,8 @@ export default function YuryEventPage() {
         <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-24">
            <div className="h-[50vh] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
-                src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=1200&auto=format&fit=crop" 
-                alt="Retreat Campfire" 
+                src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2F569a5363-7aea-4d2a-8100-6e63306d53a6%2Fmain_00.jpg.webp?table=block&id=326fe66e-b9c0-806c-af3e-dbd00b366d04&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=1150&userId=&cache=v2" 
+                alt="Strategy & Team Retreats Hero" 
                 className="w-full h-full object-cover sepia-[.3] grayscale-[.2]"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 1 }}
@@ -359,6 +361,40 @@ export default function YuryEventPage() {
 
         {/* Reviews Section */}
         <section id="reviews" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+           {/* Video Reviews */}
+           <div className="max-w-6xl mx-auto mb-24">
+             <h3 className="font-sans-chronakis font-bold text-xl md:text-2xl uppercase tracking-widest mb-12 border-l-4 border-[#E83626] pl-6">Видео-отзывы о выездах</h3>
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Video 1 */}
+                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-xl relative group">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" 
+                    title="Profi Camp 2023" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  ></iframe>
+                </div>
+                {/* Video 2 */}
+                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-xl relative group">
+                  <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" 
+                    title="Тимбилдинг Profi ru RC4" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full"
+                  ></iframe>
+                </div>
+             </div>
+           </div>
+
+           {/* Text Reviews */}
            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
              {[
                { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder" },
@@ -390,7 +426,7 @@ export default function YuryEventPage() {
                  { 
                    name: "Юрий Чихалов", 
                    role: "Создатель кэмпов / Camp Creator", 
-                   image: "./yury.jpg",
+                   image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2",
                    desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям."
                  },
                  { 
