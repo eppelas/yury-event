@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Menu, ArrowRight, ChevronDown, X } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, ChevronDown, X } from 'lucide-react';
 
 const ChronakisStyles = () => (
   <style>{`
@@ -28,10 +28,113 @@ const ChronakisStyles = () => (
   `}</style>
 );
 
-const Header = ({ setIsMenuOpen }: { setIsMenuOpen: (v: boolean) => void }) => (
+const T = {
+  header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
+  contact: { ru: 'Связаться с нами', en: 'Contact Us' },
+  book: { ru: 'Забронировать', en: 'Book' },
+  menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
+  menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
+  menu_details: { ru: 'Программа & Стоимость', en: 'Program & Pricing' },
+  menu_team: { ru: 'Наша Команда', en: 'Our Team' },
+  menu_clients: { ru: 'Клиенты & Отзывы', en: 'Clients & Reviews' },
+  hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
+  hero_title_2: { ru: 'мероприятие', en: 'events' },
+  hero_subtitle: { 
+    ru: 'Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.', 
+    en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
+  },
+  hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
+  fab_book: { ru: 'ЗАБРОНИРОВАТЬ', en: 'BOOK' },
+  fab_retreat: { ru: 'ВЫЕЗД', en: 'RETREAT' },
+  why_title: { ru: 'Зачем нужны корпоративные заезды?', en: 'Why host a corporate retreat?' },
+  why_items: {
+    ru: [
+      { title: 'Vision (Видение)', desc: 'Создать новое вдохновляющее видение будущего и превратить его в четкую стратегию.' },
+      { title: 'Trust (Доверие)', desc: 'Повысить доверие внутри команды, улучшить качество рабочих коммуникаций. Сплотить ключевых игроков.' },
+      { title: 'Inspiration (Вдохновение)', desc: 'Вернуть сотрудникам вдохновение создавать вместе новое, увидеть ответы на вопросы вне офиса.' },
+      { title: 'Energy (Энергия)', desc: 'Восстановить силы и энергию для новых свершений.' }
+    ],
+    en: [
+      { title: 'Vision', desc: 'Create a new inspiring vision of the future and turn it into a clear strategy.' },
+      { title: 'Trust', desc: 'Increase trust within the team, improve the quality of work communications. Unite key players.' },
+      { title: 'Inspiration', desc: 'Return inspiration to create together, find answers to questions that cannot be solved in the office.' },
+      { title: 'Energy', desc: 'Restore strength and energy for new achievements.' }
+    ]
+  },
+  process_title: { ru: 'Пример Дизайна Процесса', en: 'Process Design Example' },
+  process_req: { ru: 'Запрос: "Сформулировать новое видение развития компании на 2026-2030 годы"', en: 'Request: "Formulate a new development vision for 2026-2030"' },
+  process_items: {
+    ru: [
+      '1. Погружение в момент. Трансфер, чекины. Результат: Переход в настоящий момент.',
+      '2. Глубинное исследование. Фасилитация. Результат: Список ключевых вызовов.',
+      '3. Прорыв в будущее. Форсайт-сессии. Результат: Драфт долгосрочного видения.',
+      '4. Новое видение. Стратегические сессии (U-theory). Результат: Конкретные шаги.',
+      '5. Празднование. Ужины, вечеринки. Результат: Радость и сплочение.',
+      '6. Завершение. Рефлексия, мерч. Результат: Вдохновение.'
+    ],
+    en: [
+      '1. Immersion. Transfer, check-ins. Result: Transition to the present moment.',
+      '2. Deep exploration. Facilitation. Result: List of key challenges.',
+      '3. Breakthrough to the future. Foresight sessions. Result: Draft of long-term vision.',
+      '4. New vision. Strategic sessions (U-theory). Result: Concrete steps.',
+      '5. Celebration. Dinners, parties. Result: Joy and unity.',
+      '6. Completion. Reflection, merch. Result: Inspiration.'
+    ]
+  },
+  details_title: { ru: 'Программа со смыслом', en: 'Meaningful Program' },
+  toggles: {
+    ru: [
+      { title: 'Как это работает?', content: ['Проводим глубинное интервью, выясняем запрос на мероприятие...', 'Предлагаем программу под ваш бюджет.', 'Готовим сценарий мероприятия...', 'Организуем выезд под ключ.', 'Решаем все возникающие вопросы на месте.', 'Подводим итоги и помогаем интегрировать опыт.'] },
+      { title: 'Проблема / Решение', content: ['Проблема: Выезды скучные. Решение: Вовлекающие программы.', 'Проблема: Участники в телефонах. Решение: Пространство для реального общения.', 'Проблема: Сложно всё согласовать. Решение: Забираем всю организацию.'] },
+      { title: 'Из чего состоит выезд? & Стоимость', content: ['Базовый пакет: Концепция, подбор площадки, премиум-проживание.', 'Регионы: Сербия, Россия, Грузия, Армения, Казахстан, Турция, ОАЭ, Португалия.', 'Стоимость: от $900 за участника (2 дня, отель 5*).'] },
+      { title: 'Дополнительные активности', content: ['Заряжающий хайкинг: Маршрут по красивым тропам.', 'Банная церемония: Культура пара с фестивальным опытом.', 'Гала-ужин: Праздничный ужин для подведения итогов.'] }
+    ],
+    en: [
+      { title: 'How does it work?', content: ['Deep interview to define the exact goals...', 'Propose a budget-friendly program.', 'Prepare the script with group dynamics.', 'Turn-key retreat organization.', 'Resolve all on-site issues.', 'Summarize and integrate the experience.'] },
+      { title: 'Problem / Solution', content: ['Problem: Boring retreats. Solution: Deep immersive programs.', 'Problem: Phone addiction. Solution: Safe space for real talks.', 'Problem: Organization hassle. Solution: We take care of everything.'] },
+      { title: 'What is included? & Pricing', content: ['Base package: Concept, venue, premium accommodation.', 'Regions: Serbia, Russia, Georgia, Armenia, Kazakhstan, Turkey, UAE, Portugal.', 'Pricing: from $900 per person (2 days, 5* hotel).'] },
+      { title: 'Extra activities', content: ['Hiking: Beautiful trails to escape routine.', 'Banya ceremony: Steam culture with festival vibe.', 'Gala dinner: Festive networking.'] }
+    ]
+  },
+  trusted_title: { ru: 'Нам Доверяют', en: 'Trusted By' },
+  team_title: { ru: 'Наша Команда', en: 'Our Team' },
+  team: {
+    ru: [
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
+    ],
+    en: [
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
+    ]
+  },
+  reviews_video_title: { ru: 'Видео-отзывы о выездах', en: 'Video Reviews from Retreats' },
+  reviews: {
+    ru: [
+      { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder" },
+      { text: "«Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии»", author: "Ведущий дизайнер", role: "Profi.ru" },
+      { text: "«Я восхищаюсь тем, насколько ребята влюбленны в свое дело и насколько глубоко они продумывают все детали»", author: "Руководитель", role: "Тинькофф" },
+    ],
+    en: [
+      { text: "«This experience became a true celebration and reward for our team! After the retreat, the team was inspired to reach the next business level»", author: "Vlad Mikhalev", role: "Founder of Zerocoder" },
+      { text: "«The team did the impossible and organized one of the best experiences we could get in Georgia»", author: "Lead Designer", role: "Profi.ru" },
+      { text: "«I admire how much these guys love what they do and how deeply they think through all the details»", author: "Head of Unit", role: "Tinkoff" },
+    ]
+  },
+  footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
+  map: {
+    ru: ["ВЫЗОВЫ", "КОММУНИКАЦИЯ", "СТРАТЕГИЯ", "РУТИНА", "ДОВЕРИЕ", "ВЫЕЗД", "ВДОХНОВЕНИЕ", "ВИДЕНИЕ", "ЭНЕРГИЯ"],
+    en: ["CHALLENGES", "COMMUNICATION", "STRATEGY", "ROUTINE", "TRUST", "RETREAT", "INSPIRATION", "VISION", "ENERGY"]
+  },
+  compass: { ru: ["С", "Ю", "З", "В"], en: ["N", "S", "W", "E"] }
+}
+
+type Lang = 'ru' | 'en';
+
+const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
   <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-8 py-6 bg-[#F3DACE] border-b border-black/10">
     <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase">
-      СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ
+      {T.header_title[lang]}
     </div>
     
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
@@ -49,17 +152,21 @@ const Header = ({ setIsMenuOpen }: { setIsMenuOpen: (v: boolean) => void }) => (
 
     <div className="flex items-center gap-8">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
-        <a href="#en" className="hover:opacity-60 transition-opacity">EN</a>
-        <div className="w-[1px] h-4 bg-black/20" />
-        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Связаться с нами</a>
-        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Забронировать</a>
+        <button 
+          onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
+          className="hover:opacity-60 transition-opacity border-b border-black pb-0.5"
+        >
+          {lang === 'ru' ? 'EN' : 'RU'}
+        </button>
+        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity pl-4">{T.contact[lang]}</a>
+        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
       </div>
       <Menu className="w-6 h-6 cursor-pointer" onClick={() => setIsMenuOpen(true)} />
     </div>
   </header>
 );
 
-const MenuOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => (
+const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; onClose: () => void }) => (
   <AnimatePresence>
     {isOpen && (
       <motion.div 
@@ -73,54 +180,42 @@ const MenuOverlay = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
           <X className="w-8 h-8" />
         </button>
         <div className="flex flex-col gap-8 text-center font-serif-chronakis text-4xl md:text-6xl">
-          <a href="#why" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">Зачем это нужно?</a>
-          <a href="#process" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">Дизайн Процесса</a>
-          <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">Программа & Стоимость</a>
-          <a href="#clients" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">Клиенты & Отзывы</a>
-          <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">Наша Команда</a>
+          <a href="#why" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_why[lang]}</a>
+          <a href="#process" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_process[lang]}</a>
+          <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_details[lang]}</a>
+          <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_team[lang]}</a>
+          <a href="#clients" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_clients[lang]}</a>
         </div>
       </motion.div>
     )}
   </AnimatePresence>
 );
 
-const MapIllustration = ({ crazyMode }: { crazyMode: boolean }) => (
+const MapIllustration = ({ lang, crazyMode }: { lang: Lang, crazyMode: boolean }) => (
   <svg viewBox="0 0 400 400" className="w-full h-full opacity-80">
-    {/* Business Path */}
     <motion.path
       d="M50,80 C150,80 150,200 200,200 C250,200 250,320 350,320"
-      fill="none"
-      stroke="black"
-      strokeWidth="2"
+      fill="none" stroke="black" strokeWidth="2"
       animate={crazyMode ? { d: "M50,80 C100,20 200,100 200,200 C200,300 300,380 350,320" } : {}}
       transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
     />
-    
-    {/* Human/Team Path */}
     <motion.path
       d="M50,320 C150,320 100,150 200,200 C300,250 250,80 350,80"
-      fill="none"
-      stroke="black"
-      strokeWidth="2"
+      fill="none" stroke="black" strokeWidth="2"
       animate={crazyMode ? { d: "M50,320 C180,380 50,150 200,200 C350,250 220,20 350,80" } : {}}
       transition={{ duration: 2.5, repeat: Infinity, repeatType: "mirror" }}
     />
     
-    {/* Nodes */}
     {[
-      { cx: 50, cy: 80, label: "ВЫЗОВЫ" },
-      { cx: 144, cy: 140, label: "КОММУНИКАЦИЯ" },
-      { cx: 350, cy: 320, label: "СТРАТЕГИЯ" },
-      
-      { cx: 50, cy: 320, label: "РУТИНА" },
-      { cx: 125, cy: 241, label: "ДОВЕРИЕ" },
-      
-      { cx: 200, cy: 200, label: "ВЫЕЗД" },
-      
-      { cx: 275, cy: 159, label: "ВДОХНОВЕНИЕ" },
-      { cx: 350, cy: 80, label: "ВИДЕНИЕ" },
-      
-      { cx: 256, cy: 260, label: "ЭНЕРГИЯ" },
+      { cx: 50, cy: 80, label: T.map[lang][0] },
+      { cx: 144, cy: 140, label: T.map[lang][1] },
+      { cx: 350, cy: 320, label: T.map[lang][2] },
+      { cx: 50, cy: 320, label: T.map[lang][3] },
+      { cx: 125, cy: 241, label: T.map[lang][4] },
+      { cx: 200, cy: 200, label: T.map[lang][5] },
+      { cx: 275, cy: 159, label: T.map[lang][6] },
+      { cx: 350, cy: 80, label: T.map[lang][7] },
+      { cx: 256, cy: 260, label: T.map[lang][8] },
     ].map((node, i) => (
       <g key={i}>
         <circle cx={node.cx} cy={node.cy} r="4" fill="black" />
@@ -130,15 +225,14 @@ const MapIllustration = ({ crazyMode }: { crazyMode: boolean }) => (
       </g>
     ))}
     
-    {/* Compass */}
     <g transform="translate(50, 200)">
       <circle cx="0" cy="0" r="25" fill="none" stroke="black" strokeWidth="1" />
       <path d="M0,-20 L5,0 L0,20 L-5,0 Z" fill="black" />
       <path d="M-20,0 L0,-5 L20,0 L0,5 Z" fill="none" stroke="black" />
-      <text y="-30" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">С</text>
-      <text y="35" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">Ю</text>
-      <text x="-35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">З</text>
-      <text x="35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">В</text>
+      <text y="-30" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">{T.compass[lang][0]}</text>
+      <text y="35" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">{T.compass[lang][1]}</text>
+      <text x="-35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">{T.compass[lang][2]}</text>
+      <text x="35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">{T.compass[lang][3]}</text>
     </g>
   </svg>
 );
@@ -155,7 +249,7 @@ const ListItem = ({ number, title, description }: { number: number, title: strin
   </div>
 );
 
-const ToggleSection = ({ title, children }: { title: string, children: React.ReactNode }) => {
+const ToggleSection = ({ title, content }: { title: string, content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-black/10 py-6 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -170,9 +264,9 @@ const ToggleSection = ({ title, children }: { title: string, children: React.Rea
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         className="overflow-hidden"
       >
-        <div className="pt-6 font-sans-chronakis text-base leading-relaxed opacity-80 max-w-2xl">
-          {children}
-        </div>
+        <ul className="pt-6 font-sans-chronakis text-base leading-relaxed opacity-80 max-w-2xl list-disc pl-5 space-y-3">
+          {content.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
       </motion.div>
     </div>
   );
@@ -181,13 +275,15 @@ const ToggleSection = ({ title, children }: { title: string, children: React.Rea
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [lang, setLang] = useState<Lang>('ru');
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
     <div ref={containerRef} className="h-screen overflow-y-scroll bg-[#F3DACE] text-black selection:bg-black selection:text-[#F3DACE] hide-scrollbar relative">
       <ChronakisStyles />
-      <Header setIsMenuOpen={setIsMenuOpen} />
-      <MenuOverlay isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <Header lang={lang} setLang={setLang} setIsMenuOpen={setIsMenuOpen} />
+      <MenuOverlay lang={lang} isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
       {/* Sidebar Pattern */}
       <div className="fixed left-0 top-0 bottom-0 w-8 md:w-12 border-r border-black/10 dotted-pattern z-30 hidden md:block pointer-events-none" />
@@ -199,8 +295,8 @@ export default function YuryEventPage() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => setCrazyMode(!crazyMode)}
       >
-        <span className="block mb-1">ЗАБРОНИРОВАТЬ</span>
-        <span className="block">ВЫЕЗД</span>
+        <span className="block mb-1">{T.fab_book[lang]}</span>
+        <span className="block">{T.fab_retreat[lang]}</span>
       </motion.button>
 
       <main className="pl-0 md:pl-12 pt-24">
@@ -213,233 +309,100 @@ export default function YuryEventPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Создаём аутентичное<br className="hidden md:block"/>мероприятие
+            {T.hero_title_1[lang]}<br className="hidden md:block"/>{T.hero_title_2[lang]}
           </motion.h1>
           <p className="font-serif-chronakis text-xl max-w-3xl mx-auto mb-12 opacity-80 leading-relaxed">
-            Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.
+            {T.hero_subtitle[lang]}
           </p>
           <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60">
-            КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27
+            {T.hero_caption[lang]}
           </p>
         </section>
 
         {/* Split Section 1: Map & Why */}
         <section id="why" className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] border-b border-black/10 pt-24">
-          {/* Left: Map */}
           <div className="relative border-r border-black/10 p-8 md:p-16 flex items-center justify-center overflow-hidden bg-[#F3DACE]">
             <div className="absolute inset-0 opacity-5 dotted-pattern" />
             <div className="w-full max-w-lg aspect-square relative mix-blend-multiply">
-               <MapIllustration crazyMode={crazyMode} />
+               <MapIllustration lang={lang} crazyMode={crazyMode} />
             </div>
           </div>
 
-          {/* Right: List */}
           <div className="p-8 lg:p-16 flex flex-col justify-center bg-[#F3DACE]">
-            <h2 className="font-sans-chronakis text-xl font-bold uppercase tracking-widest mb-12">Зачем нужны корпоративные заезды?</h2>
+            <h2 className="font-sans-chronakis text-xl font-bold uppercase tracking-widest mb-12">{T.why_title[lang]}</h2>
             <div className="space-y-12">
-              <ListItem 
-                number={1} 
-                title="Vision (Видение)" 
-                description="Создать новое вдохновляющее видение будущего и превратить его в четкую стратегию."
-              />
-              <ListItem 
-                number={2} 
-                title="Trust (Доверие)" 
-                description="Повысить доверие внутри команды, улучшить качество рабочих коммуникаций. Сплотить ключевых игроков команды."
-              />
-              <ListItem 
-                number={3} 
-                title="Inspiration (Вдохновение)" 
-                description="Вернуть сотрудникам вдохновение создавать вместе новое, увидеть ответы на вопросы, которые не решаются в стенах офиса."
-              />
-              <ListItem 
-                number={4} 
-                title="Energy (Энергия)" 
-                description="Восстановить силы и энергию для новых свершений."
-              />
+              {T.why_items[lang].map((item, i) => (
+                <ListItem key={i} number={i+1} title={item.title} description={item.desc} />
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Full Width Image Section - How it works / Design */}
+        {/* Full Width Image Section - Process */}
         <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-24">
            <div className="h-[50vh] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
                 src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2F569a5363-7aea-4d2a-8100-6e63306d53a6%2Fmain_00.jpg.webp?table=block&id=326fe66e-b9c0-806c-af3e-dbd00b366d04&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=1150&userId=&cache=v2" 
-                alt="Strategy & Team Retreats Hero" 
-                className="w-full h-full object-cover sepia-[.3] grayscale-[.2]"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 1 }}
+                alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
            </div>
            <div className="p-8 lg:p-16 flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-8">
                  <div className="w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm">✓</div>
-                 <h2 className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">Пример Дизайна Процесса</h2>
+                 <h2 className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">{T.process_title[lang]}</h2>
               </div>
               <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed mb-6 font-bold">
-                 Запрос: "Сформулировать новое видение развития компании на 2026-2030 годы"
+                 {T.process_req[lang]}
               </p>
               <ul className="font-sans-chronakis text-sm mt-4 opacity-80 leading-relaxed max-w-md space-y-4">
-                 <li><strong>1. Погружение в момент.</strong> Трансфер, чекины. Результат: Переход в настоящий момент.</li>
-                 <li><strong>2. Глубинное исследование.</strong> Фасилитация. Результат: Список ключевых вызовов.</li>
-                 <li><strong>3. Прорыв в будущее.</strong> Форсайт-сессии. Результат: Драфт долгосрочного видения.</li>
-                 <li><strong>4. Новое видение.</strong> Стратегические сессии (U-theory). Результат: Конкретные шаги.</li>
-                 <li><strong>5. Празднование.</strong> Ужины, вечеринки. Результат: Радость и сплочение.</li>
-                 <li><strong>6. Завершение.</strong> Рефлексия, мерч. Результат: Вдохновение.</li>
+                 {T.process_items[lang].map((item, i) => <li key={i}>{item}</li>)}
               </ul>
            </div>
         </section>
 
-        {/* Toggles Section: How it works & Cost */}
+        {/* Toggles */}
         <section id="details" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
            <div className="max-w-4xl mx-auto space-y-2">
               <div className="text-center mb-16">
-                 <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">Программа со смыслом</h2>
+                 <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.details_title[lang]}</h2>
                  <div className="w-24 h-[1px] bg-black mx-auto" />
               </div>
-              <ToggleSection title="Как это работает?">
-                <ul className="list-disc pl-5 space-y-3">
-                  <li>Проводим глубинное интервью, выясняем запрос на мероприятие с командой заказчика, учитываем цели компании и индивидуальные запросы всех участников.</li>
-                  <li>Предлагаем программу под ваш бюджет.</li>
-                  <li>Готовим сценарий мероприятия: обращаем внимание на работу с состоянием и групповой динамикой.</li>
-                  <li>Организуем выезд под ключ.</li>
-                  <li>Решаем все возникающие вопросы на месте.</li>
-                  <li>Подводим итоги и помогаем интегрировать полученный опыт.</li>
-                </ul>
-              </ToggleSection>
-              
-              <ToggleSection title="Проблема / Решение">
-                <ul className="list-disc pl-5 space-y-3">
-                  <li><strong>Проблема:</strong> Выезды часто бывают скучными или утомительными.<br/><strong>Решение:</strong> Предлагаем глубокие, вовлекающие программы.</li>
-                  <li><strong>Проблема:</strong> Участники сидят в телефонах.<br/><strong>Решение:</strong> Создаем безопасное пространство для присутствия и реального общения.</li>
-                  <li><strong>Проблема:</strong> Сложно согласовать детали поездки.<br/><strong>Решение:</strong> Предоставляем детальные, продуманные программы и забираем всю организацию.</li>
-                </ul>
-              </ToggleSection>
-
-              <ToggleSection title="Из чего состоит выезд? & Стоимость">
-                <p className="mb-4"><strong>Базовый пакет:</strong> Концепция, подбор площадки, забота о комфорте. Включает трансфер, консьерж-сервис и премиум-проживание (Грузия, Алматы, Сочи и др.).</p>
-                <p className="mb-4"><strong>Регионы:</strong> Сербия, Россия, Грузия, Армения, Казахстан, Турция, ОАЭ, Португалия.</p>
-                <p><strong>Стоимость:</strong> Зависит от количества участников, программы и локации. В среднем — от $900 за участника (2 дня, отель 5*, программа, без перелета).</p>
-              </ToggleSection>
-              
-              <ToggleSection title="Дополнительные активности">
-                <ul className="list-disc pl-5 space-y-3">
-                  <li><strong>Заряжающий хайкинг:</strong> Маршрут по красивым тропам поможет отвлечься от рутины и насладиться природой.</li>
-                  <li><strong>Банная церемония:</strong> Культура пара с фестивальным опытом (Burning Man vibe), расслабление и перезагрузка.</li>
-                  <li><strong>Гала-ужин:</strong> Праздничный ужин для подведения итогов и неформального общения.</li>
-                </ul>
-              </ToggleSection>
+              {T.toggles[lang].map((t, i) => (
+                <ToggleSection key={i} title={t.title} content={t.content} />
+              ))}
            </div>
         </section>
 
-        {/* Clients Section */}
+        {/* Clients */}
         <section id="clients" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10 pt-24">
            <div className="text-center mb-16">
-              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">Нам Доверяют</h2>
+              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.trusted_title[lang]}</h2>
               <div className="w-24 h-[1px] bg-black mx-auto" />
            </div>
-           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-12 max-w-5xl mx-auto opacity-70 font-sans-chronakis text-xl md:text-3xl font-bold uppercase tracking-widest text-center leading-loose">
-             <span>Raiffeisen BANK</span>
-             <span className="opacity-30">•</span>
-             <span>Yandex</span>
-             <span className="opacity-30">•</span>
-             <span>Aviasales</span>
-             <span className="opacity-30">•</span>
-             <span>Miro</span>
-             <span className="opacity-30">•</span>
-             <span>Profi.ru</span>
-             <span className="opacity-30">•</span>
-             <span>Subsquid</span>
-             <span className="opacity-30">•</span>
-             <span>RichAds</span>
-             <span className="opacity-30">•</span>
+           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-12 gap-y-12 opacity-70 font-sans-chronakis text-xl md:text-3xl font-bold uppercase tracking-widest text-center">
+             <span>Raiffeisen BANK</span><span className="opacity-30">•</span>
+             <span>Yandex</span><span className="opacity-30">•</span>
+             <span>Aviasales</span><span className="opacity-30">•</span>
+             <span>Miro</span><span className="opacity-30">•</span>
+             <span>Profi.ru</span><span className="opacity-30">•</span>
+             <span>Subsquid</span><span className="opacity-30">•</span>
+             <span>RichAds</span><span className="opacity-30">•</span>
              <span>Zerocoder</span>
            </div>
         </section>
 
-        {/* Reviews Section */}
-        <section id="reviews" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
-           {/* Video Reviews */}
-           <div className="max-w-6xl mx-auto mb-24">
-             <h3 className="font-sans-chronakis font-bold text-xl md:text-2xl uppercase tracking-widest mb-12 border-l-4 border-[#E83626] pl-6">Видео-отзывы о выездах</h3>
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Video 1 */}
-                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-xl relative group">
-                  <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" 
-                    title="Profi Camp 2023" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  ></iframe>
-                </div>
-                {/* Video 2 */}
-                <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-xl relative group">
-                  <iframe 
-                    width="100%" 
-                    height="100%" 
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1" 
-                    title="Тимбилдинг Profi ru RC4" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  ></iframe>
-                </div>
-             </div>
-           </div>
-
-           {/* Text Reviews */}
-           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-             {[
-               { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder" },
-               { text: "«Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии»", author: "Ведущий дизайнер", role: "Profi.ru" },
-               { text: "«Я восхищаюсь тем, насколько ребята влюбленны в свое дело и насколько глубоко они продумывают все детали»", author: "Руководитель", role: "Тинькофф" },
-             ].map((review, i) => (
-                <div key={i} className="flex flex-col h-full border border-black/10 p-8 bg-[#EFE5DE] hover:-translate-y-2 transition-transform duration-500">
-                  <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed flex-grow mb-8">
-                    {review.text}
-                  </p>
-                  <div className="pt-6 border-t border-black/10">
-                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author}</p>
-                    <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role}</p>
-                  </div>
-                </div>
-             ))}
-           </div>
-        </section>
-
-        {/* Guides Section */}
-        <section id="team" className="py-24 px-8 md:px-16 bg-[#EFE5DE] pt-24">
+        {/* Guides Section (Now BEFORE Reviews) */}
+        <section id="team" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10 pt-24">
            <div className="text-center mb-16">
-              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">Наша Команда</h2>
+              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.team_title[lang]}</h2>
               <div className="w-24 h-[1px] bg-black mx-auto" />
            </div>
-
            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-2xl mx-auto">
-              {[
-                 { 
-                   name: "Юрий Чихалов", 
-                   role: "Создатель кэмпов / Camp Creator", 
-                   image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2",
-                   desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям."
-                 },
-                 { 
-                   name: "Дмитрий Риман", 
-                   role: "Серийный предприниматель", 
-                   image: "./dmitry.jpg",
-                   desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex."
-                 }
-              ].map((guide, i) => (
+              {T.team[lang].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
                     <div className="aspect-[3/4] w-48 overflow-hidden mb-6 border border-black/10 relative rounded-t-full">
                        <img src={guide.image} alt={guide.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                       <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 group-hover:opacity-0 transition-opacity pointer-events-none" />
                     </div>
                     <h3 className="font-sans-chronakis font-bold text-lg tracking-widest uppercase mb-2">{guide.name}</h3>
                     <p className="font-serif-chronakis italic opacity-70 mb-4 text-[16px]">{guide.role}</p>
@@ -449,10 +412,67 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        {/* Footer */}
+        {/* Reviews Section (Now AFTER Team) */}
+        <section id="reviews" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+           <div className="max-w-6xl mx-auto mb-24">
+             <h3 className="font-sans-chronakis font-bold text-xl md:text-2xl uppercase tracking-widest mb-12 border-l-4 border-[#E83626] pl-6">{T.reviews_video_title[lang]}</h3>
+             <div className="flex flex-wrap gap-8">
+                <div 
+                  className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
+                  onClick={() => setActiveVideo("yQSvOz0p5ts")}
+                >
+                  <img src={`https://img.youtube.com/vi/yQSvOz0p5ts/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi Camp 2023" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4 right-4 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm" />
+                    <div className="text-white drop-shadow-md">
+                      <div className="font-bold text-sm tracking-wide">Profi Camp 2023</div>
+                      <div className="text-[10px] opacity-90">Chimmynator</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div 
+                  className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
+                  onClick={() => setActiveVideo("LocnrbflD5w")}
+                >
+                  <img src={`https://img.youtube.com/vi/LocnrbflD5w/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi ru RC4" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
+                    </div>
+                  </div>
+                  <div className="absolute top-4 left-4 right-4 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-white shadow-sm" />
+                    <div className="text-white drop-shadow-md">
+                      <div className="font-bold text-sm tracking-wide">тимбилдинг Profi ru RC4</div>
+                      <div className="text-[10px] opacity-90">Chimmynator</div>
+                    </div>
+                  </div>
+                </div>
+             </div>
+           </div>
+
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+             {T.reviews[lang].map((review, i) => (
+                <div key={i} className="flex flex-col h-full border border-black/10 p-8 bg-[#EFE5DE] hover:-translate-y-2 transition-transform duration-500">
+                  <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed flex-grow mb-8">{review.text}</p>
+                  <div className="pt-6 border-t border-black/10">
+                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author}</p>
+                    <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role}</p>
+                  </div>
+                </div>
+             ))}
+           </div>
+        </section>
+
         <footer className="py-12 px-8 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-8">
            <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase text-center">
-              Стратегические и Командные Выезды © 2026
+              {T.footer_text[lang]}
            </div>
            <div className="flex flex-wrap justify-center gap-8 font-sans-chronakis text-xs tracking-widest uppercase opacity-80 items-center">
               <span>chikhalov@gmail.com</span>
@@ -462,6 +482,31 @@ export default function YuryEventPage() {
         </footer>
 
       </main>
+
+      {/* Video Lightbox Player Overlay */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div 
+            className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4 md:p-12 cursor-pointer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveVideo(null)}
+          >
+            <button className="absolute top-6 right-6 text-white hover:text-[#E83626] transition-colors" onClick={() => setActiveVideo(null)}>
+              <X className="w-10 h-10" />
+            </button>
+            <div className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl relative cursor-default" onClick={e => e.stopPropagation()}>
+               <iframe 
+                 width="100%" height="100%" 
+                 src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+                 title="Video Playback" frameBorder="0" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen
+                 className="absolute inset-0 w-full h-full"
+               ></iframe>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
