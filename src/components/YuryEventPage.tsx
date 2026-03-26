@@ -31,12 +31,19 @@ const ChronakisStyles = () => (
 const Header = ({ setIsMenuOpen }: { setIsMenuOpen: (v: boolean) => void }) => (
   <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-8 py-6 bg-[#F3DACE] border-b border-black/10">
     <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase">
-      STRATEGY & TEAM RETREATS
+      СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ
     </div>
     
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
-      <div className="w-20 h-20 border border-black rounded-full flex items-center justify-center font-serif-chronakis italic text-lg shadow-sm">
-        SteamX
+      <div className="flex flex-col items-center justify-center relative hover:-translate-y-1 transition-transform cursor-pointer">
+        <svg viewBox="0 0 24 24" className="w-8 text-black opacity-30 absolute -top-5" overflow="visible">
+          <path d="M12,24 C7,17 7,10 12,3 C17,-4 17,-11 12,-18" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" />
+          <path d="M6,20 C2,14 2,8 6,2 C10,-4 10,-10 6,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
+          <path d="M18,20 C14,14 14,8 18,2 C22,-4 22,-10 18,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
+        </svg>
+        <div className="font-serif-chronakis italic text-3xl font-medium tracking-wider relative z-10 pt-2">
+          Steam<span className="opacity-80">X</span>
+        </div>
       </div>
     </div>
 
@@ -99,19 +106,19 @@ const MapIllustration = ({ crazyMode }: { crazyMode: boolean }) => (
     
     {/* Nodes */}
     {[
-      { cx: 50, cy: 80, label: "CHALLENGES" },
-      { cx: 144, cy: 140, label: "COMMUNICATION" },
-      { cx: 350, cy: 320, label: "STRATEGY" },
+      { cx: 50, cy: 80, label: "ВЫЗОВЫ" },
+      { cx: 144, cy: 140, label: "КОММУНИКАЦИЯ" },
+      { cx: 350, cy: 320, label: "СТРАТЕГИЯ" },
       
-      { cx: 50, cy: 320, label: "ROUTINE" },
-      { cx: 125, cy: 241, label: "TRUST" },
+      { cx: 50, cy: 320, label: "РУТИНА" },
+      { cx: 125, cy: 241, label: "ДОВЕРИЕ" },
       
-      { cx: 200, cy: 200, label: "RETREAT" },
+      { cx: 200, cy: 200, label: "ВЫЕЗД" },
       
-      { cx: 275, cy: 159, label: "INSPIRATION" },
-      { cx: 350, cy: 80, label: "VISION" },
+      { cx: 275, cy: 159, label: "ВДОХНОВЕНИЕ" },
+      { cx: 350, cy: 80, label: "ВИДЕНИЕ" },
       
-      { cx: 256, cy: 260, label: "ENERGY" },
+      { cx: 256, cy: 260, label: "ЭНЕРГИЯ" },
     ].map((node, i) => (
       <g key={i}>
         <circle cx={node.cx} cy={node.cy} r="4" fill="black" />
@@ -126,10 +133,10 @@ const MapIllustration = ({ crazyMode }: { crazyMode: boolean }) => (
       <circle cx="0" cy="0" r="25" fill="none" stroke="black" strokeWidth="1" />
       <path d="M0,-20 L5,0 L0,20 L-5,0 Z" fill="black" />
       <path d="M-20,0 L0,-5 L20,0 L0,5 Z" fill="none" stroke="black" />
-      <text y="-30" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">N</text>
-      <text y="35" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">S</text>
-      <text x="-35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">W</text>
-      <text x="35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">E</text>
+      <text y="-30" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">С</text>
+      <text y="35" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">Ю</text>
+      <text x="-35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">З</text>
+      <text x="35" y="3" textAnchor="middle" className="font-sans-chronakis text-[8px] font-bold">В</text>
     </g>
   </svg>
 );
@@ -185,13 +192,13 @@ export default function YuryEventPage() {
 
       {/* Floating Action Button */}
       <motion.button 
-        className="fixed bottom-8 right-8 z-50 w-24 h-24 md:w-32 md:h-32 bg-[#E83626] rounded-full flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-xs md:text-sm tracking-widest shadow-lg hover:scale-105 transition-transform"
+        className="fixed bottom-8 right-8 z-50 w-28 h-28 md:w-36 md:h-36 bg-[#E83626] rounded-full flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-[9px] md:text-[11px] tracking-widest shadow-lg hover:scale-105 transition-transform"
         animate={{ rotate: [-45, 45, -45] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         onClick={() => setCrazyMode(!crazyMode)}
       >
-        <span className="block mb-1">BOOK</span>
-        <span className="block">RETREAT</span>
+        <span className="block mb-1">ЗАБРОНИРОВАТЬ</span>
+        <span className="block">ВЫЕЗД</span>
       </motion.button>
 
       <main className="pl-0 md:pl-12 pt-24">
@@ -210,7 +217,7 @@ export default function YuryEventPage() {
             Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.
           </p>
           <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60">
-            CORPORATE RETREATS — 2026/27
+            КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27
           </p>
         </section>
 
@@ -381,16 +388,16 @@ export default function YuryEventPage() {
            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-2xl mx-auto">
               {[
                  { 
-                   name: "Yury Chikhalov", 
-                   role: "Camp Creator globally", 
-                   image: "/yury.jpg",
-                   desc: "Camp creator globally, founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences."
+                   name: "Юрий Чихалов", 
+                   role: "Создатель кэмпов / Camp Creator", 
+                   image: "./yury.jpg",
+                   desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям."
                  },
                  { 
-                   name: "Dmitry Riman", 
-                   role: "Serial Entrepreneur", 
-                   image: "/dmitry.jpg",
-                   desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex."
+                   name: "Дмитрий Риман", 
+                   role: "Серийный предприниматель", 
+                   image: "./dmitry.jpg",
+                   desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex."
                  }
               ].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
@@ -408,8 +415,8 @@ export default function YuryEventPage() {
 
         {/* Footer */}
         <footer className="py-12 px-8 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-8">
-           <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase">
-              Strategy & Team Retreats © 2026
+           <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase text-center">
+              Стратегические и Командные Выезды © 2026
            </div>
            <div className="flex flex-wrap justify-center gap-8 font-sans-chronakis text-xs tracking-widest uppercase opacity-80 items-center">
               <span>chikhalov@gmail.com</span>
