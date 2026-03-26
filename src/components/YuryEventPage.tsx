@@ -36,7 +36,7 @@ const T = {
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
   menu_details: { ru: 'Программа & Стоимость', en: 'Program & Pricing' },
   menu_team: { ru: 'Наша Команда', en: 'Our Team' },
-  menu_clients: { ru: 'Клиенты & Отзывы', en: 'Clients & Reviews' },
+  menu_clients: { ru: 'Отзывы', en: 'Reviews' },
   hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
   hero_title_2: { ru: 'мероприятие', en: 'events' },
   hero_subtitle: { 
@@ -150,17 +150,17 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
       </div>
     </div>
 
-    <div className="flex items-center gap-8">
+    <div className="flex items-center gap-6 md:gap-8">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
-        <button 
-          onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
-          className="hover:opacity-60 transition-opacity border-b border-black pb-0.5"
-        >
-          {lang === 'ru' ? 'EN' : 'RU'}
-        </button>
-        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity pl-4">{T.contact[lang]}</a>
+        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
         <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
       </div>
+      <button 
+        onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
+        className="font-sans-chronakis text-xs tracking-widest font-bold uppercase hover:opacity-60 transition-opacity border-b border-black pb-0.5 w-6 text-center"
+      >
+        {lang === 'ru' ? 'EN' : 'RU'}
+      </button>
       <Menu className="w-6 h-6 cursor-pointer" onClick={() => setIsMenuOpen(true)} />
     </div>
   </header>
@@ -237,7 +237,7 @@ const MapIllustration = ({ lang, crazyMode }: { lang: Lang, crazyMode: boolean }
   </svg>
 );
 
-const ListItem = ({ number, title, description }: { number: number, title: string, description?: string }) => (
+const ListItem = ({ number, title, description }: { key?: number | string, number: number, title: string, description?: string }) => (
   <div className="flex gap-6 group cursor-pointer w-full">
     <div className="flex-shrink-0 w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm group-hover:bg-[#E83626] transition-colors">
       {number}
@@ -249,7 +249,7 @@ const ListItem = ({ number, title, description }: { number: number, title: strin
   </div>
 );
 
-const ToggleSection = ({ title, content }: { title: string, content: string[] }) => {
+const ToggleSection = ({ title, content }: { key?: number | string, title: string, content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="border-b border-black/10 py-6 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
@@ -374,25 +374,7 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        {/* Clients */}
-        <section id="clients" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10 pt-24">
-           <div className="text-center mb-16">
-              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.trusted_title[lang]}</h2>
-              <div className="w-24 h-[1px] bg-black mx-auto" />
-           </div>
-           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-12 gap-y-12 opacity-70 font-sans-chronakis text-xl md:text-3xl font-bold uppercase tracking-widest text-center">
-             <span>Raiffeisen BANK</span><span className="opacity-30">•</span>
-             <span>Yandex</span><span className="opacity-30">•</span>
-             <span>Aviasales</span><span className="opacity-30">•</span>
-             <span>Miro</span><span className="opacity-30">•</span>
-             <span>Profi.ru</span><span className="opacity-30">•</span>
-             <span>Subsquid</span><span className="opacity-30">•</span>
-             <span>RichAds</span><span className="opacity-30">•</span>
-             <span>Zerocoder</span>
-           </div>
-        </section>
-
-        {/* Guides Section (Now BEFORE Reviews) */}
+        {/* Guides Section (Now BEFORE Clients) */}
         <section id="team" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10 pt-24">
            <div className="text-center mb-16">
               <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.team_title[lang]}</h2>
@@ -409,6 +391,24 @@ export default function YuryEventPage() {
                     <p className="font-sans-chronakis text-sm opacity-60 leading-relaxed max-w-xs">{guide.desc}</p>
                  </div>
               ))}
+           </div>
+        </section>
+
+        {/* Clients */}
+        <section id="clients" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+           <div className="text-center mb-16">
+              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.trusted_title[lang]}</h2>
+              <div className="w-24 h-[1px] bg-black mx-auto" />
+           </div>
+           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-12 gap-y-12 opacity-70 font-sans-chronakis text-xl md:text-3xl font-bold uppercase tracking-widest text-center">
+             <span>Raiffeisen BANK</span><span className="opacity-30">•</span>
+             <span>Yandex</span><span className="opacity-30">•</span>
+             <span>Aviasales</span><span className="opacity-30">•</span>
+             <span>Miro</span><span className="opacity-30">•</span>
+             <span>Profi.ru</span><span className="opacity-30">•</span>
+             <span>Subsquid</span><span className="opacity-30">•</span>
+             <span>RichAds</span><span className="opacity-30">•</span>
+             <span>Zerocoder</span>
            </div>
         </section>
 
