@@ -1,5 +1,5 @@
 {
-  "name": "yury-event",
+  "name": "react-example",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,8 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit",
-    "check": "npm run lint && npm run build"
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
