@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, ChevronDown, X } from 'lucide-react';
+import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users } from 'lucide-react';
 
 const ChronakisStyles = () => (
   <style>{`
@@ -33,8 +33,9 @@ const T = {
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
   book: { ru: 'Забронировать', en: 'Book' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
+  menu_formats: { ru: 'Форматы', en: 'Formats' },
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
-  menu_details: { ru: 'Программа & Стоимость', en: 'Program & Pricing' },
+  menu_details: { ru: 'Подход & Стоимость', en: 'Approach & Pricing' },
   menu_team: { ru: 'Наша Команда', en: 'Our Team' },
   menu_clients: { ru: 'Отзывы', en: 'Reviews' },
   hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
@@ -81,19 +82,109 @@ const T = {
       '6. Completion. Reflection, merch. Result: Inspiration.'
     ]
   },
+  formats_title: { ru: 'Форматы, которые можно собрать под задачу', en: 'Formats tailored to your goal' },
+  formats_intro: {
+    ru: 'Мы не продаём один шаблонный выезд. Под задачу команды собирается формат, ритм и глубина: от стратегической перезагрузки до деликатного выезда для ключевых людей.',
+    en: 'We do not sell one fixed retreat. We shape the format, rhythm, and depth around your team: from strategic reset to intimate offsites for key people.',
+  },
+  formats: {
+    ru: [
+      {
+        title: 'Strategy Retreat',
+        eyebrow: 'Для собственников и leadership-команды',
+        text: 'Когда нужно выйти из операционки, собрать видение, принять сложные решения и договориться о следующем цикле движения.',
+        points: ['Видение и стратегия', 'Приоритеты на 6–12 месяцев', 'Ключевые развилки и решения'],
+      },
+      {
+        title: 'Team Retreat',
+        eyebrow: 'Для команды, которой нужен общий ритм',
+        text: 'Когда важно восстановить доверие, вернуть живую коммуникацию и заново почувствовать себя одной командой, а не набором функций.',
+        points: ['Коммуникация и доверие', 'Сцепка между людьми', 'Энергия и вовлечённость'],
+      },
+      {
+        title: 'Leadership Offsite',
+        eyebrow: 'Для ключевых людей и непростых разговоров',
+        text: 'Когда нужен камерный формат для важных обсуждений, выравнивания ролей, прояснения напряжений и сборки зрелой управленческой опоры.',
+        points: ['Роли и ожидания', 'Сложные разговоры', 'Управленческая ясность'],
+      },
+    ],
+    en: [
+      {
+        title: 'Strategy Retreat',
+        eyebrow: 'For founders and leadership',
+        text: 'Designed for teams that need to step out of operations, shape vision, make hard decisions, and align on the next cycle of growth.',
+        points: ['Vision and strategy', '6–12 month priorities', 'Key decisions and trade-offs'],
+      },
+      {
+        title: 'Team Retreat',
+        eyebrow: 'For teams that need shared rhythm',
+        text: 'Built to restore trust, bring back real communication, and help people feel like one team again instead of a set of functions.',
+        points: ['Communication and trust', 'Human cohesion', 'Energy and engagement'],
+      },
+      {
+        title: 'Leadership Offsite',
+        eyebrow: 'For key people and important conversations',
+        text: 'A more intimate format for role alignment, high-stakes conversations, clearing tension, and strengthening the core leadership group.',
+        points: ['Roles and expectations', 'Difficult conversations', 'Leadership clarity'],
+      },
+    ],
+  },
+  effectiveness_title: { ru: 'Почему наш подход работает эффективно', en: 'Why our approach works' },
+  effectiveness_intro: {
+    ru: 'Эффективность рождается не из количества активностей, а из точной сборки: правильного запроса, сильного ритма и пространства, где команда может и думать, и восстанавливаться.',
+    en: 'What makes it effective is not the number of activities, but the design itself: the right question, the right rhythm, and a space where the team can both think and recover.',
+  },
+  effectiveness: {
+    ru: [
+      {
+        title: 'Начинаем с бизнес-запроса',
+        text: 'Сначала уточняем, что именно должно измениться после выезда: решения, коммуникация, доверие, стратегия или состояние команды.',
+      },
+      {
+        title: 'Собираем ритм, а не набор активностей',
+        text: 'Чередуем глубокую работу, восстановление и неформальные моменты так, чтобы каждый блок усиливал следующий, а не утомлял участников.',
+      },
+      {
+        title: 'Работаем с динамикой группы',
+        text: 'Учитываем состав команды, напряжения, роли и темпераменты, чтобы люди не просто присутствовали, а реально включались в процесс.',
+      },
+      {
+        title: 'Берём организацию на себя',
+        text: 'Логистика, площадка, проживание, переходы и on-site сопровождение собраны под ключ, поэтому лидеры могут быть внутри процесса, а не в администрировании.',
+      },
+    ],
+    en: [
+      {
+        title: 'We start with the business question',
+        text: 'First we define what should change after the retreat: decisions, communication, trust, strategy, or the state of the team.',
+      },
+      {
+        title: 'We design rhythm, not activity overload',
+        text: 'Deep work, recovery, and informal moments are sequenced so each block amplifies the next one instead of draining people.',
+      },
+      {
+        title: 'We work with group dynamics',
+        text: 'We consider tensions, roles, personalities, and team composition so people truly engage rather than just show up.',
+      },
+      {
+        title: 'We take care of execution',
+        text: 'Logistics, venue, transitions, accommodation, and on-site coordination are handled for you so leaders can stay inside the process.',
+      },
+    ],
+  },
   details_title: { ru: 'Программа со смыслом', en: 'Meaningful Program' },
   toggles: {
     ru: [
-      { title: 'Как это работает?', content: ['Проводим глубинное интервью, выясняем запрос на мероприятие...', 'Предлагаем программу под ваш бюджет.', 'Готовим сценарий мероприятия...', 'Организуем выезд под ключ.', 'Решаем все возникающие вопросы на месте.', 'Подводим итоги и помогаем интегрировать опыт.'] },
-      { title: 'Проблема / Решение', content: ['Проблема: Выезды скучные. Решение: Вовлекающие программы.', 'Проблема: Участники в телефонах. Решение: Пространство для реального общения.', 'Проблема: Сложно всё согласовать. Решение: Забираем всю организацию.'] },
-      { title: 'Из чего состоит выезд? & Стоимость', content: ['Базовый пакет: Концепция, подбор площадки, премиум-проживание.', 'Регионы: Сербия, Россия, Грузия, Армения, Казахстан, Турция, ОАЭ, Португалия.', 'Стоимость: от $900 за участника (2 дня, отель 5*).'] },
-      { title: 'Дополнительные активности', content: ['Заряжающий хайкинг: Маршрут по красивым тропам.', 'Банная церемония: Культура пара с фестивальным опытом.', 'Гала-ужин: Праздничный ужин для подведения итогов.'] }
+      { title: 'Как мы собираем выезд', content: ['Проводим интервью и формулируем запрос.', 'Проектируем ритм выезда под команду и бюджет.', 'Готовим сценарий, площадку и логистику.', 'Сопровождаем процесс на месте и помогаем интегрировать результат.'] },
+      { title: 'Что входит в базовый пакет', content: ['Концепция и сценарий.', 'Подбор площадки и премиум-проживание.', 'Трансфер, питание и организация под ключ.', 'Работа с групповой динамикой и сопровождение команды.'] },
+      { title: 'Стоимость и география', content: ['Стоимость: от $900 за участника (2 дня, отель 5*).', 'Регионы: Сербия, Россия, Грузия, Армения, Казахстан, Турция, ОАЭ, Португалия.', 'Финальная смета зависит от формата, состава группы и уровня сервиса.'] },
+      { title: 'Дополнительные активности', content: ['Заряжающий хайкинг для смены контекста.', 'Банная церемония как формат восстановления и сближения.', 'Гала-ужин или вечерний перформанс для интеграции и празднования.'] }
     ],
     en: [
-      { title: 'How does it work?', content: ['Deep interview to define the exact goals...', 'Propose a budget-friendly program.', 'Prepare the script with group dynamics.', 'Turn-key retreat organization.', 'Resolve all on-site issues.', 'Summarize and integrate the experience.'] },
-      { title: 'Problem / Solution', content: ['Problem: Boring retreats. Solution: Deep immersive programs.', 'Problem: Phone addiction. Solution: Safe space for real talks.', 'Problem: Organization hassle. Solution: We take care of everything.'] },
-      { title: 'What is included? & Pricing', content: ['Base package: Concept, venue, premium accommodation.', 'Regions: Serbia, Russia, Georgia, Armenia, Kazakhstan, Turkey, UAE, Portugal.', 'Pricing: from $900 per person (2 days, 5* hotel).'] },
-      { title: 'Extra activities', content: ['Hiking: Beautiful trails to escape routine.', 'Banya ceremony: Steam culture with festival vibe.', 'Gala dinner: Festive networking.'] }
+      { title: 'How we build the retreat', content: ['We start with an interview and define the real request.', 'We design the rhythm around team dynamics and budget.', 'We prepare the program flow, venue, and logistics.', 'We guide the process on-site and help integrate outcomes.'] },
+      { title: 'What the base package includes', content: ['Concept and process design.', 'Venue selection and premium accommodation.', 'Transfer, food, and turn-key organization.', 'Group dynamics work and full support on-site.'] },
+      { title: 'Pricing and geography', content: ['Pricing starts from $900 per person (2 days, 5* hotel).', 'Regions: Serbia, Russia, Georgia, Armenia, Kazakhstan, Turkey, UAE, Portugal.', 'The final estimate depends on format, group size, and service level.'] },
+      { title: 'Extra experiences', content: ['Hiking to change state and context.', 'Banya ceremony for recovery and real human closeness.', 'Gala dinner or evening performance for integration and celebration.'] }
     ]
   },
   trusted_title: { ru: 'Нам Доверяют', en: 'Trusted By' },
@@ -181,6 +272,7 @@ const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; o
         </button>
         <div className="flex flex-col gap-8 text-center font-serif-chronakis text-4xl md:text-6xl">
           <a href="#why" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_why[lang]}</a>
+          <a href="#formats" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_formats[lang]}</a>
           <a href="#process" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_process[lang]}</a>
           <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_details[lang]}</a>
           <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_team[lang]}</a>
@@ -272,6 +364,41 @@ const ToggleSection = ({ title, content }: { key?: number | string, title: strin
   );
 };
 
+const FormatCard = ({ icon: Icon, eyebrow, title, text, points }: { icon: React.ComponentType<{ className?: string }>; eyebrow: string; title: string; text: string; points: string[] }) => (
+  <div className="relative border border-black/10 bg-[#EFE5DE] p-8 md:p-10 min-h-[24rem] flex flex-col">
+    <div className="absolute top-0 left-8 right-8 h-px border-t border-dashed border-black/20 hidden md:block" />
+    <div className="w-12 h-12 rounded-full bg-[#E83626] text-[#F3DACE] flex items-center justify-center mb-8 shadow-sm">
+      <Icon className="w-5 h-5" />
+    </div>
+    <p className="font-sans-chronakis text-[10px] tracking-[0.25em] uppercase opacity-60 mb-3">{eyebrow}</p>
+    <h3 className="font-serif-chronakis text-3xl md:text-4xl mb-5 leading-tight">{title}</h3>
+    <p className="font-serif-chronakis text-lg leading-relaxed opacity-80 mb-8">{text}</p>
+    <div className="mt-auto space-y-3 pt-6 border-t border-black/10">
+      {points.map((point) => (
+        <div key={point} className="flex items-center gap-3 font-sans-chronakis text-xs tracking-widest uppercase">
+          <span className="w-2 h-2 rounded-full bg-[#E83626]" />
+          <span>{point}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ProofCard = ({ icon: Icon, index, title, text }: { icon: React.ComponentType<{ className?: string }>; index: string; title: string; text: string }) => (
+  <div className="border-t border-black/15 pt-6 pb-2">
+    <div className="flex items-start gap-4">
+      <div className="w-12 h-12 rounded-full border border-black/15 flex items-center justify-center text-[#E83626] shrink-0">
+        <Icon className="w-5 h-5" />
+      </div>
+      <div className="space-y-3">
+        <div className="font-sans-chronakis text-[10px] tracking-[0.28em] uppercase opacity-50">{index}</div>
+        <h3 className="font-serif-chronakis text-2xl md:text-3xl leading-tight">{title}</h3>
+        <p className="font-serif-chronakis text-lg leading-relaxed opacity-80 max-w-2xl">{text}</p>
+      </div>
+    </div>
+  </div>
+);
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -361,8 +488,77 @@ export default function YuryEventPage() {
            </div>
         </section>
 
+        <section id="formats" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 mb-14 items-end">
+              <div>
+                <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_formats[lang]}</p>
+                <h2 className="font-serif-chronakis text-4xl md:text-5xl leading-tight">{T.formats_title[lang]}</h2>
+              </div>
+              <p className="font-serif-chronakis text-xl leading-relaxed opacity-80 max-w-2xl">{T.formats_intro[lang]}</p>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 relative">
+              <div className="hidden xl:block absolute left-[16.66%] right-[16.66%] top-10 border-t border-dashed border-black/15" />
+              {[
+                { icon: Target, ...T.formats[lang][0] },
+                { icon: Users, ...T.formats[lang][1] },
+                { icon: Layers3, ...T.formats[lang][2] },
+              ].map((format) => (
+                <FormatCard
+                  key={format.title}
+                  icon={format.icon}
+                  eyebrow={format.eyebrow}
+                  title={format.title}
+                  text={format.text}
+                  points={format.points}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="details" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14">
+            <div className="space-y-6">
+              <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55">{T.effectiveness_title[lang]}</p>
+              <h2 className="font-serif-chronakis text-4xl md:text-5xl leading-tight">
+                {lang === 'ru' ? 'Точная сборка даёт сильный результат' : 'The design itself creates the result'}
+              </h2>
+              <p className="font-serif-chronakis text-xl leading-relaxed opacity-80 max-w-xl">{T.effectiveness_intro[lang]}</p>
+              <div className="pt-4 border-t border-black/10">
+                <div className="font-sans-chronakis text-xs tracking-[0.22em] uppercase opacity-55 mb-2">
+                  {lang === 'ru' ? 'Не “активности ради активностей”' : 'Not activity overload'}
+                </div>
+                <div className="font-serif-chronakis text-2xl leading-snug">
+                  {lang === 'ru'
+                    ? 'Запрос, ритм, пространство и сопровождение работают как единая система.'
+                    : 'Question, rhythm, environment, and execution work as one system.'}
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-8">
+              {[
+                { icon: Target, index: '01', ...T.effectiveness[lang][0] },
+                { icon: Compass, index: '02', ...T.effectiveness[lang][1] },
+                { icon: Sparkles, index: '03', ...T.effectiveness[lang][2] },
+                { icon: ShieldCheck, index: '04', ...T.effectiveness[lang][3] },
+              ].map((item) => (
+                <ProofCard
+                  key={item.index}
+                  icon={item.icon}
+                  index={item.index}
+                  title={item.title}
+                  text={item.text}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Toggles */}
-        <section id="details" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+        <section className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10">
            <div className="max-w-4xl mx-auto space-y-2">
               <div className="text-center mb-16">
                  <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.details_title[lang]}</h2>
