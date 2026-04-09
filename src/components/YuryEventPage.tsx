@@ -31,7 +31,7 @@ const ChronakisStyles = () => (
 const T = {
   header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
-  book: { ru: 'Забронировать', en: 'Book' },
+  book: { ru: 'Хочу деталей!', en: 'Want details!' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
   menu_formats: { ru: 'Форматы', en: 'Formats' },
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
@@ -45,8 +45,8 @@ const T = {
     en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
   },
   hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
-  fab_book: { ru: 'ЗАБРОНИРОВАТЬ', en: 'BOOK' },
-  fab_retreat: { ru: 'ВЫЕЗД', en: 'RETREAT' },
+  fab_book: { ru: 'ХОЧУ', en: 'WANT' },
+  fab_retreat: { ru: 'ДЕТАЛЕЙ!', en: 'DETAILS!' },
   why_title: { ru: 'Зачем нужны корпоративные заезды?', en: 'Why host a corporate retreat?' },
   why_items: {
     ru: [
@@ -191,11 +191,11 @@ const T = {
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
   team: {
     ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury.jpg", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
       { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
     ],
     en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury.jpg", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
@@ -223,8 +223,8 @@ const T = {
 type Lang = 'ru' | 'en';
 
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
-  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-8 py-6 bg-[#F3DACE] border-b border-black/10">
-    <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase">
+  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-4">
+    <div className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[12rem] md:max-w-none">
       {T.header_title[lang]}
     </div>
     
@@ -241,10 +241,10 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
       </div>
     </div>
 
-    <div className="flex items-center gap-6 md:gap-8">
+    <div className="flex items-center gap-4 md:gap-8 shrink-0">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
-        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
-        <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
+        <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
+        <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
       </div>
       <button 
         onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
@@ -365,14 +365,14 @@ const ToggleSection = ({ title, content }: { key?: number | string, title: strin
 };
 
 const FormatCard = ({ icon: Icon, eyebrow, title, text, points }: { icon: React.ComponentType<{ className?: string }>; eyebrow: string; title: string; text: string; points: string[] }) => (
-  <div className="relative border border-black/10 bg-[#EFE5DE] p-8 md:p-10 min-h-[24rem] flex flex-col">
+  <div className="relative border border-black/10 bg-[#EFE5DE] p-6 md:p-10 min-h-[22rem] md:min-h-[24rem] flex flex-col">
     <div className="absolute top-0 left-8 right-8 h-px border-t border-dashed border-black/20 hidden md:block" />
     <div className="w-12 h-12 rounded-full bg-[#E83626] text-[#F3DACE] flex items-center justify-center mb-8 shadow-sm">
       <Icon className="w-5 h-5" />
     </div>
     <p className="font-sans-chronakis text-[10px] tracking-[0.25em] uppercase opacity-60 mb-3">{eyebrow}</p>
-    <h3 className="font-serif-chronakis text-3xl md:text-4xl mb-5 leading-tight">{title}</h3>
-    <p className="font-serif-chronakis text-lg leading-relaxed opacity-80 mb-8">{text}</p>
+    <h3 className="font-serif-chronakis text-2xl md:text-4xl mb-4 md:mb-5 leading-tight">{title}</h3>
+    <p className="font-serif-chronakis text-base md:text-lg leading-relaxed opacity-80 mb-6 md:mb-8">{text}</p>
     <div className="mt-auto space-y-3 pt-6 border-t border-black/10">
       {points.map((point) => (
         <div key={point} className="flex items-center gap-3 font-sans-chronakis text-xs tracking-widest uppercase">
@@ -416,29 +416,31 @@ export default function YuryEventPage() {
       <div className="fixed left-0 top-0 bottom-0 w-8 md:w-12 border-r border-black/10 dotted-pattern z-30 hidden md:block pointer-events-none" />
 
       {/* Floating Action Button */}
-      <motion.button 
-        className="fixed bottom-8 right-8 z-50 w-28 h-28 md:w-36 md:h-36 bg-[#E83626] rounded-full flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-[9px] md:text-[11px] tracking-widest shadow-lg hover:scale-105 transition-transform"
-        animate={{ rotate: [-45, 45, -45] }}
+      <motion.a
+        href="https://t.me/chikhalov2"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 w-24 h-24 md:w-36 md:h-36 bg-[#E83626] rounded-full flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-[9px] md:text-[11px] tracking-widest shadow-lg hover:scale-105 transition-transform"
+        animate={{ rotate: [-18, 18, -18] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        onClick={() => setCrazyMode(!crazyMode)}
       >
         <span className="block mb-1">{T.fab_book[lang]}</span>
         <span className="block">{T.fab_retreat[lang]}</span>
-      </motion.button>
+      </motion.a>
 
-      <main className="pl-0 md:pl-12 pt-24">
+      <main className="pl-0 md:pl-12 pt-20 md:pt-24">
         
         {/* Hero Title */}
-        <section className="py-24 px-8 md:px-16 text-center border-b border-black/10 relative">
+        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative">
           <motion.h1 
-            className="font-serif-chronakis text-4xl md:text-6xl lg:text-7xl mb-6 mx-auto max-w-5xl leading-[1.1]"
+            className="font-serif-chronakis text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto max-w-5xl leading-[1.08]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
             {T.hero_title_1[lang]}<br className="hidden md:block"/>{T.hero_title_2[lang]}
           </motion.h1>
-          <p className="font-serif-chronakis text-xl max-w-3xl mx-auto mb-12 opacity-80 leading-relaxed">
+          <p className="font-serif-chronakis text-lg md:text-xl max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
             {T.hero_subtitle[lang]}
           </p>
           <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60">
@@ -447,17 +449,17 @@ export default function YuryEventPage() {
         </section>
 
         {/* Split Section 1: Map & Why */}
-        <section id="why" className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] border-b border-black/10 pt-24">
-          <div className="relative border-r border-black/10 p-8 md:p-16 flex items-center justify-center overflow-hidden bg-[#F3DACE]">
+        <section id="why" className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] border-b border-black/10 pt-16 md:pt-24">
+          <div className="relative border-r border-black/10 p-5 md:p-16 flex items-center justify-center overflow-hidden bg-[#F3DACE] min-h-[18rem] md:min-h-0">
             <div className="absolute inset-0 opacity-5 dotted-pattern" />
             <div className="w-full max-w-lg aspect-square relative mix-blend-multiply">
                <MapIllustration lang={lang} crazyMode={crazyMode} />
             </div>
           </div>
 
-          <div className="p-8 lg:p-16 flex flex-col justify-center bg-[#F3DACE]">
-            <h2 className="font-sans-chronakis text-xl font-bold uppercase tracking-widest mb-12">{T.why_title[lang]}</h2>
-            <div className="space-y-12">
+          <div className="p-5 md:p-8 lg:p-16 flex flex-col justify-center bg-[#F3DACE]">
+            <h2 className="font-sans-chronakis text-lg md:text-xl font-bold uppercase tracking-widest mb-8 md:mb-12">{T.why_title[lang]}</h2>
+            <div className="space-y-8 md:space-y-12">
               {T.why_items[lang].map((item, i) => (
                 <ListItem key={i} number={i+1} title={item.title} description={item.desc} />
               ))}
@@ -466,15 +468,19 @@ export default function YuryEventPage() {
         </section>
 
         {/* Full Width Image Section - Process */}
-        <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-24">
-           <div className="h-[50vh] lg:h-auto overflow-hidden relative border-r border-black/10">
+        <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
+           <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
-                src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2F569a5363-7aea-4d2a-8100-6e63306d53a6%2Fmain_00.jpg.webp?table=block&id=326fe66e-b9c0-806c-af3e-dbd00b366d04&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=1150&userId=&cache=v2" 
+                src="./dmitry.jpg"
                 alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
+              <div className="absolute left-4 bottom-4 md:left-8 md:bottom-8 bg-[#F3DACE]/85 backdrop-blur-sm border border-black/10 px-4 py-3 max-w-xs">
+                <div className="font-sans-chronakis text-[10px] tracking-[0.22em] uppercase mb-2">{lang === 'ru' ? 'Живой дизайн процесса' : 'Live process design'}</div>
+                <div className="font-serif-chronakis text-base md:text-lg leading-snug">{lang === 'ru' ? 'Сильный выезд строится не вокруг развлечений, а вокруг точного ритма команды.' : 'A strong retreat is built around team rhythm, not random activities.'}</div>
+              </div>
            </div>
-           <div className="p-8 lg:p-16 flex flex-col justify-center">
+           <div className="p-5 md:p-8 lg:p-16 flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-8">
                  <div className="w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm">✓</div>
                  <h2 className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">{T.process_title[lang]}</h2>
@@ -488,7 +494,7 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        <section id="formats" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10">
+        <section id="formats" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 mb-14 items-end">
               <div>
@@ -518,7 +524,7 @@ export default function YuryEventPage() {
           </div>
         </section>
 
-        <section id="details" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10">
+        <section id="details" className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-14">
             <div className="space-y-6">
               <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55">{T.effectiveness_title[lang]}</p>
@@ -558,7 +564,7 @@ export default function YuryEventPage() {
         </section>
 
         {/* Toggles */}
-        <section className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10">
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
            <div className="max-w-4xl mx-auto space-y-2">
               <div className="text-center mb-16">
                  <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.details_title[lang]}</h2>
@@ -571,15 +577,15 @@ export default function YuryEventPage() {
         </section>
 
         {/* Guides Section (Now BEFORE Clients) */}
-        <section id="team" className="py-24 px-8 md:px-16 bg-[#EFE5DE] border-b border-black/10 pt-24">
+        <section id="team" className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
            <div className="text-center mb-16">
               <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.team_title[lang]}</h2>
               <div className="w-24 h-[1px] bg-black mx-auto" />
            </div>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-2xl mx-auto">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-2xl mx-auto">
               {T.team[lang].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
-                    <div className="aspect-[3/4] w-48 overflow-hidden mb-6 border border-black/10 relative rounded-t-full">
+                    <div className="aspect-[3/4] w-44 md:w-48 overflow-hidden mb-5 md:mb-6 border border-black/10 relative rounded-t-full">
                        <img src={guide.image} alt={guide.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                     </div>
                     <h3 className="font-sans-chronakis font-bold text-lg tracking-widest uppercase mb-2">{guide.name}</h3>
@@ -591,12 +597,12 @@ export default function YuryEventPage() {
         </section>
 
         {/* Clients */}
-        <section id="clients" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+        <section id="clients" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
            <div className="text-center mb-16">
               <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.trusted_title[lang]}</h2>
               <div className="w-24 h-[1px] bg-black mx-auto" />
            </div>
-           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-12 gap-y-12 opacity-70 font-sans-chronakis text-xl md:text-3xl font-bold uppercase tracking-widest text-center">
+           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-6 md:gap-x-12 gap-y-8 md:gap-y-12 opacity-70 font-sans-chronakis text-base md:text-3xl font-bold uppercase tracking-[0.14em] md:tracking-widest text-center">
              <span>Raiffeisen BANK</span><span className="opacity-30">•</span>
              <span>Yandex</span><span className="opacity-30">•</span>
              <span>Aviasales</span><span className="opacity-30">•</span>
@@ -609,10 +615,10 @@ export default function YuryEventPage() {
         </section>
 
         {/* Reviews Section (Now AFTER Team) */}
-        <section id="reviews" className="py-24 px-8 md:px-16 bg-[#F3DACE] border-b border-black/10 pt-24">
+        <section id="reviews" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
            <div className="max-w-6xl mx-auto mb-24">
-             <h3 className="font-sans-chronakis font-bold text-xl md:text-2xl uppercase tracking-widest mb-12 border-l-4 border-[#E83626] pl-6">{T.reviews_video_title[lang]}</h3>
-             <div className="flex flex-wrap gap-8">
+             <h3 className="font-sans-chronakis font-bold text-lg md:text-2xl uppercase tracking-widest mb-8 md:mb-12 border-l-4 border-[#E83626] pl-4 md:pl-6">{T.reviews_video_title[lang]}</h3>
+             <div className="flex flex-wrap gap-5 md:gap-8">
                 <div 
                   className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
                   onClick={() => setActiveVideo("STTUYBhyOsM")}
@@ -653,10 +659,10 @@ export default function YuryEventPage() {
              </div>
            </div>
 
-           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
              {T.reviews[lang].map((review, i) => (
-                <div key={i} className="flex flex-col h-full border border-black/10 p-8 bg-[#EFE5DE] hover:-translate-y-2 transition-transform duration-500">
-                  <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed flex-grow mb-8">{review.text}</p>
+                <div key={i} className="flex flex-col h-full border border-black/10 p-5 md:p-8 bg-[#EFE5DE] hover:-translate-y-2 transition-transform duration-500">
+                  <p className="font-serif-chronakis text-lg md:text-2xl leading-relaxed flex-grow mb-6 md:mb-8">{review.text}</p>
                   <div className="pt-6 border-t border-black/10">
                     <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author}</p>
                     <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role}</p>
@@ -666,13 +672,13 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        <footer className="py-12 px-8 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <footer className="py-10 md:py-12 px-5 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
            <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase text-center">
               {T.footer_text[lang]}
            </div>
            <div className="flex flex-wrap justify-center gap-8 font-sans-chronakis text-xs tracking-widest uppercase opacity-80 items-center">
               <span>chikhalov@gmail.com</span>
-              <a href="https://t.me/chikhalov" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Telegram</a>
+              <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Telegram</a>
               <span>+7(915)212-05-73</span>
            </div>
         </footer>
