@@ -191,11 +191,11 @@ const T = {
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
   team: {
     ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury-original.png", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
       { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
     ],
     en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury-original.png", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
@@ -471,7 +471,7 @@ export default function YuryEventPage() {
         <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
            <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
-                src="./process-original.jpg"
+                src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2F569a5363-7aea-4d2a-8100-6e63306d53a6%2Fmain_00.jpg.webp?table=block&id=326fe66e-b9c0-806c-af3e-dbd00b366d04&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=1150&userId=&cache=v2"
                 alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
