@@ -191,11 +191,11 @@ const T = {
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
   team: {
     ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury.jpg", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury-original.png", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
       { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
     ],
     en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury.jpg", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury-original.png", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
@@ -471,14 +471,10 @@ export default function YuryEventPage() {
         <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
            <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
-                src="./dmitry.jpg"
+                src="./process-original.jpg"
                 alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
-              <div className="absolute left-4 bottom-4 md:left-8 md:bottom-8 bg-[#F3DACE]/85 backdrop-blur-sm border border-black/10 px-4 py-3 max-w-xs">
-                <div className="font-sans-chronakis text-[10px] tracking-[0.22em] uppercase mb-2">{lang === 'ru' ? 'Живой дизайн процесса' : 'Live process design'}</div>
-                <div className="font-serif-chronakis text-base md:text-lg leading-snug">{lang === 'ru' ? 'Сильный выезд строится не вокруг развлечений, а вокруг точного ритма команды.' : 'A strong retreat is built around team rhythm, not random activities.'}</div>
-              </div>
            </div>
            <div className="p-5 md:p-8 lg:p-16 flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-8">
