@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users } from 'lucide-react';
+import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck } from 'lucide-react';
 
 const ChronakisStyles = () => (
   <style>{`
@@ -29,7 +29,7 @@ const ChronakisStyles = () => (
 );
 
 const T = {
-  header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
+  header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ ДЛЯ БИЗНЕСА', en: 'STRATEGY & TEAM RETREATS FOR BUSINESS' },
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
   book: { ru: 'Хочу деталей!', en: 'Want details!' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
@@ -38,16 +38,16 @@ const T = {
   menu_details: { ru: 'Подход & Стоимость', en: 'Approach & Pricing' },
   menu_team: { ru: 'Наша Команда', en: 'Our Team' },
   menu_clients: { ru: 'Отзывы', en: 'Reviews' },
-  hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
-  hero_title_2: { ru: 'мероприятие', en: 'events' },
+  hero_title_1: { ru: 'Выезд, после которого', en: 'A retreat that turns' },
+  hero_title_2: { ru: 'команда двигается вместе', en: 'a team into motion' },
   hero_subtitle: { 
-    ru: 'Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.', 
-    en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
+    ru: 'Проектируем и организуем B2B-корпоративные выезды под ключ: стратегия, доверие, энергия команды, логистика и сильный опыт в одном процессе.', 
+    en: 'We design and deliver turnkey B2B corporate retreats: strategy, trust, team energy, logistics, and a memorable experience in one process.' 
   },
   hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
   fab_book: { ru: 'ХОЧУ', en: 'WANT' },
   fab_retreat: { ru: 'ДЕТАЛЕЙ!', en: 'DETAILS!' },
-  why_title: { ru: 'Зачем нужны корпоративные заезды?', en: 'Why host a corporate retreat?' },
+  why_title: { ru: 'Зачем нужны корпоративные выезды?', en: 'Why host a corporate retreat?' },
   why_items: {
     ru: [
       { title: 'Vision (Видение)', desc: 'Создать новое вдохновляющее видение будущего и превратить его в четкую стратегию.' },
@@ -61,6 +61,25 @@ const T = {
       { title: 'Inspiration', desc: 'Return inspiration to create together, find answers to questions that cannot be solved in the office.' },
       { title: 'Energy', desc: 'Restore strength and energy for new achievements.' }
     ]
+  },
+  outcomes_title: { ru: 'Под какие бизнес-задачи мы собираем выезд', en: 'Business outcomes we design for' },
+  outcomes_intro: {
+    ru: 'Перед программой мы уточняем, какой сдвиг нужен компании. От этого зависит формат, площадка, ритм, фасилитация и состав активностей.',
+    en: 'Before designing the program, we define the shift the company needs. The format, venue, rhythm, facilitation, and activities follow that question.',
+  },
+  outcomes: {
+    ru: [
+      { title: 'Стратегическая ясность', text: 'Собрать видение, приоритеты и решения, которые сложно принять в офисной операционке.' },
+      { title: 'Синхронизация leadership-команды', text: 'Выравнять ожидания, роли, ответственность и договорённости между ключевыми людьми.' },
+      { title: 'Доверие и коммуникация', text: 'Снизить напряжение, вернуть живой контакт и создать пространство для честных разговоров.' },
+      { title: 'Восстановление ресурса', text: 'Дать команде сильный опыт, смену контекста и энергию для нового цикла работы.' },
+    ],
+    en: [
+      { title: 'Strategic clarity', text: 'Shape vision, priorities, and decisions that are hard to reach inside daily operations.' },
+      { title: 'Leadership alignment', text: 'Align expectations, roles, ownership, and agreements between key people.' },
+      { title: 'Trust and communication', text: 'Reduce tension, restore real contact, and create space for honest conversations.' },
+      { title: 'Energy recovery', text: 'Give the team a powerful experience, a change of context, and energy for the next cycle.' },
+    ],
   },
   process_title: { ru: 'Пример Дизайна Процесса', en: 'Process Design Example' },
   process_req: { ru: 'Запрос: "Сформулировать новое видение развития компании на 2026-2030 годы"', en: 'Request: "Formulate a new development vision for 2026-2030"' },
@@ -191,11 +210,11 @@ const T = {
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
   team: {
     ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury.jpg", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
       { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
     ],
     en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2Feda62b8e-fb8d-4a62-a189-46b698ec1230%2FUntitled.png?table=block&id=326fe66e-b9c0-8044-9e09-d75881d7d7eb&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=420&userId=&cache=v2", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury.jpg", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
@@ -213,6 +232,12 @@ const T = {
     ]
   },
   footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
+  final_cta_title: { ru: 'Соберём выезд под вашу задачу', en: 'Let’s shape a retreat around your business question' },
+  final_cta_text: {
+    ru: 'Напишите, сколько человек в команде, где вы хотите провести выезд и какой результат нужен после него. Мы предложим формат, ритм и ориентир по бюджету.',
+    en: 'Tell us your team size, preferred geography, and the result you need after the retreat. We will propose the format, rhythm, and budget range.',
+  },
+  final_cta_button: { ru: 'Обсудить выезд', en: 'Discuss retreat' },
   map: {
     ru: ["ВЫЗОВЫ", "КОММУНИКАЦИЯ", "СТРАТЕГИЯ", "РУТИНА", "ДОВЕРИЕ", "ВЫЕЗД", "ВДОХНОВЕНИЕ", "ВИДЕНИЕ", "ЭНЕРГИЯ"],
     en: ["CHALLENGES", "COMMUNICATION", "STRATEGY", "ROUTINE", "TRUST", "RETREAT", "INSPIRATION", "VISION", "ENERGY"]
@@ -364,7 +389,7 @@ const ToggleSection = ({ title, content }: { key?: number | string, title: strin
   );
 };
 
-const FormatCard = ({ icon: Icon, eyebrow, title, text, points }: { icon: React.ComponentType<{ className?: string }>; eyebrow: string; title: string; text: string; points: string[] }) => (
+const FormatCard = ({ icon: Icon, eyebrow, title, text, points }: { key?: React.Key; icon: React.ComponentType<{ className?: string }>; eyebrow: string; title: string; text: string; points: string[] }) => (
   <div className="relative border border-black/10 bg-[#EFE5DE] p-6 md:p-10 min-h-[22rem] md:min-h-[24rem] flex flex-col">
     <div className="absolute top-0 left-8 right-8 h-px border-t border-dashed border-black/20 hidden md:block" />
     <div className="w-12 h-12 rounded-full bg-[#E83626] text-[#F3DACE] flex items-center justify-center mb-8 shadow-sm">
@@ -384,7 +409,7 @@ const FormatCard = ({ icon: Icon, eyebrow, title, text, points }: { icon: React.
   </div>
 );
 
-const ProofCard = ({ icon: Icon, index, title, text }: { icon: React.ComponentType<{ className?: string }>; index: string; title: string; text: string }) => (
+const ProofCard = ({ icon: Icon, index, title, text }: { key?: React.Key; icon: React.ComponentType<{ className?: string }>; index: string; title: string; text: string }) => (
   <div className="border-t border-black/15 pt-6 pb-2">
     <div className="flex items-start gap-4">
       <div className="w-12 h-12 rounded-full border border-black/15 flex items-center justify-center text-[#E83626] shrink-0">
@@ -399,6 +424,20 @@ const ProofCard = ({ icon: Icon, index, title, text }: { icon: React.ComponentTy
   </div>
 );
 
+const OutcomeCard = ({ icon: Icon, title, text }: { key?: React.Key; icon: React.ComponentType<{ className?: string }>; title: string; text: string }) => (
+  <div className="border-t border-black/15 py-6 md:py-8">
+    <div className="flex gap-5 items-start">
+      <div className="w-11 h-11 rounded-full bg-black text-[#F3DACE] flex items-center justify-center shrink-0">
+        <Icon className="w-5 h-5" />
+      </div>
+      <div>
+        <h3 className="font-sans-chronakis text-sm tracking-widest uppercase font-bold mb-3">{title}</h3>
+        <p className="font-serif-chronakis text-lg md:text-xl leading-relaxed opacity-80">{text}</p>
+      </div>
+    </div>
+  </div>
+);
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -407,7 +446,7 @@ export default function YuryEventPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <div ref={containerRef} className="h-screen overflow-y-scroll bg-[#F3DACE] text-black selection:bg-black selection:text-[#F3DACE] hide-scrollbar relative">
+    <div ref={containerRef} className="h-screen overflow-y-scroll overflow-x-hidden bg-[#F3DACE] text-black selection:bg-black selection:text-[#F3DACE] hide-scrollbar relative">
       <ChronakisStyles />
       <Header lang={lang} setLang={setLang} setIsMenuOpen={setIsMenuOpen} />
       <MenuOverlay lang={lang} isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
@@ -431,19 +470,47 @@ export default function YuryEventPage() {
       <main className="pl-0 md:pl-12 pt-20 md:pt-24">
         
         {/* Hero Title */}
-        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative">
-          <motion.h1 
-            className="font-serif-chronakis text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto max-w-5xl leading-[1.08]"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative overflow-hidden">
+          <h1
+            className="font-serif-chronakis text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto w-full max-w-[21rem] sm:max-w-5xl leading-[1.08]"
           >
-            {T.hero_title_1[lang]}<br className="hidden md:block"/>{T.hero_title_2[lang]}
-          </motion.h1>
-          <p className="font-serif-chronakis text-lg md:text-xl max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
+            {lang === 'ru' ? (
+              <>
+                Выезд, после<br />
+                которого<br />
+                команда<br />
+                двигается вместе
+              </>
+            ) : (
+              <>
+                {T.hero_title_1[lang]}<br />
+                {T.hero_title_2[lang]}
+              </>
+            )}
+          </h1>
+          <p className="font-serif-chronakis text-[15px] sm:text-lg md:text-xl max-w-[18rem] sm:max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
             {T.hero_subtitle[lang]}
           </p>
-          <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mb-10">
+            {(lang === 'ru'
+              ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
+              : ['For founders', 'For HR and People teams', 'For leadership teams']
+            ).map((item) => (
+              <span key={item} className="border border-black/15 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-[#EFE5DE] max-w-[calc(100vw-3rem)] leading-relaxed">
+                {item}
+              </span>
+            ))}
+          </div>
+          <a
+            href="https://t.me/chikhalov2"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-3 bg-black text-[#F3DACE] px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#E83626] transition-colors"
+          >
+            <CalendarCheck className="w-4 h-4" />
+            {T.final_cta_button[lang]}
+          </a>
+          <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60 mt-10">
             {T.hero_caption[lang]}
           </p>
         </section>
@@ -467,11 +534,33 @@ export default function YuryEventPage() {
           </div>
         </section>
 
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-16">
+            <div className="lg:sticky lg:top-28 self-start">
+              <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">
+                {lang === 'ru' ? 'B2B-задачи' : 'B2B outcomes'}
+              </p>
+              <h2 className="font-serif-chronakis text-4xl md:text-5xl leading-tight mb-6">{T.outcomes_title[lang]}</h2>
+              <p className="font-serif-chronakis text-xl leading-relaxed opacity-80">{T.outcomes_intro[lang]}</p>
+            </div>
+            <div>
+              {[
+                { icon: Target, ...T.outcomes[lang][0] },
+                { icon: Route, ...T.outcomes[lang][1] },
+                { icon: MessageSquare, ...T.outcomes[lang][2] },
+                { icon: Handshake, ...T.outcomes[lang][3] },
+              ].map((outcome) => (
+                <OutcomeCard key={outcome.title} icon={outcome.icon} title={outcome.title} text={outcome.text} />
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Full Width Image Section - Process */}
         <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
            <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
-                src="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F4aba98be-086c-45e9-b852-e8141f5b6604%2F569a5363-7aea-4d2a-8100-6e63306d53a6%2Fmain_00.jpg.webp?table=block&id=326fe66e-b9c0-806c-af3e-dbd00b366d04&spaceId=4aba98be-086c-45e9-b852-e8141f5b6604&width=1150&userId=&cache=v2"
+                src="./process-original.jpg"
                 alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
@@ -666,6 +755,26 @@ export default function YuryEventPage() {
                 </div>
              ))}
            </div>
+        </section>
+
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#E83626] text-[#F3DACE] border-b border-black/10">
+          <div className="max-w-5xl mx-auto text-center">
+            <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-6 text-[#F3DACE]">
+              {T.final_cta_title[lang]}
+            </h2>
+            <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-90 max-w-3xl mx-auto mb-10">
+              {T.final_cta_text[lang]}
+            </p>
+            <a
+              href="https://t.me/chikhalov2"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-3 bg-[#F3DACE] text-black px-7 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-black hover:text-[#F3DACE] transition-colors"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              {T.final_cta_button[lang]}
+            </a>
+          </div>
         </section>
 
         <footer className="py-10 md:py-12 px-5 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
