@@ -29,24 +29,24 @@ const ChronakisStyles = () => (
 );
 
 const T = {
-  header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ ДЛЯ БИЗНЕСА', en: 'STRATEGY & TEAM RETREATS FOR BUSINESS' },
+  header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
-  book: { ru: 'Хочу деталей!', en: 'Want details!' },
+  book: { ru: 'Забронировать', en: 'Book' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
   menu_formats: { ru: 'Форматы', en: 'Formats' },
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
   menu_details: { ru: 'Подход & Стоимость', en: 'Approach & Pricing' },
   menu_team: { ru: 'Наша Команда', en: 'Our Team' },
   menu_clients: { ru: 'Отзывы', en: 'Reviews' },
-  hero_title_1: { ru: 'Выезд, после которого', en: 'A retreat that turns' },
-  hero_title_2: { ru: 'команда двигается вместе', en: 'a team into motion' },
+  hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
+  hero_title_2: { ru: 'мероприятие', en: 'events' },
   hero_subtitle: { 
-    ru: 'Проектируем и организуем B2B-корпоративные выезды под ключ: стратегия, доверие, энергия команды, логистика и сильный опыт в одном процессе.', 
-    en: 'We design and deliver turnkey B2B corporate retreats: strategy, trust, team energy, logistics, and a memorable experience in one process.' 
+    ru: 'Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.', 
+    en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
   },
   hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
-  fab_book: { ru: 'ХОЧУ', en: 'WANT' },
-  fab_retreat: { ru: 'ДЕТАЛЕЙ!', en: 'DETAILS!' },
+  fab_book: { ru: 'ЗАБРОНИРОВАТЬ', en: 'BOOK' },
+  fab_retreat: { ru: 'ВЫЕЗД', en: 'RETREAT' },
   why_title: { ru: 'Зачем нужны корпоративные выезды?', en: 'Why host a corporate retreat?' },
   why_items: {
     ru: [
@@ -474,19 +474,8 @@ export default function YuryEventPage() {
           <h1
             className="font-serif-chronakis text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto w-full max-w-[21rem] sm:max-w-5xl leading-[1.08]"
           >
-            {lang === 'ru' ? (
-              <>
-                Выезд, после<br />
-                которого<br />
-                команда<br />
-                двигается вместе
-              </>
-            ) : (
-              <>
-                {T.hero_title_1[lang]}<br />
-                {T.hero_title_2[lang]}
-              </>
-            )}
+            {T.hero_title_1[lang]}<br className="hidden md:block" />
+            {T.hero_title_2[lang]}
           </h1>
           <p className="font-serif-chronakis text-[15px] sm:text-lg md:text-xl max-w-[18rem] sm:max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
             {T.hero_subtitle[lang]}
@@ -508,7 +497,7 @@ export default function YuryEventPage() {
             className="inline-flex items-center gap-3 bg-black text-[#F3DACE] px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#E83626] transition-colors"
           >
             <CalendarCheck className="w-4 h-4" />
-            {T.final_cta_button[lang]}
+            {T.book[lang]}
           </a>
           <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60 mt-10">
             {T.hero_caption[lang]}
