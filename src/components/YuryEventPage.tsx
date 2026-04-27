@@ -248,9 +248,22 @@ const T = {
 type Lang = 'ru' | 'en';
 
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
-  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#E8D1A4]/95 backdrop-blur-sm border-b border-black/10 gap-4">
+  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-4">
     <div className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[12rem] md:max-w-none">
       {T.header_title[lang]}
+    </div>
+    
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
+      <div className="flex flex-col items-center justify-center relative hover:-translate-y-1 transition-transform cursor-pointer">
+        <svg viewBox="0 0 24 24" className="w-8 text-black opacity-30 absolute -top-5" overflow="visible">
+          <path d="M12,24 C7,17 7,10 12,3 C17,-4 17,-11 12,-18" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" />
+          <path d="M6,20 C2,14 2,8 6,2 C10,-4 10,-10 6,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
+          <path d="M18,20 C14,14 14,8 18,2 C22,-4 22,-10 18,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
+        </svg>
+        <div className="font-serif-chronakis italic text-3xl font-medium tracking-wider relative z-10 pt-2">
+          Steam<span className="opacity-80">X</span>
+        </div>
+      </div>
     </div>
 
     <div className="flex items-center gap-4 md:gap-8 shrink-0">
@@ -457,13 +470,9 @@ export default function YuryEventPage() {
       <main className="pl-0 md:pl-12 pt-20 md:pt-24">
         
         {/* Hero Title */}
-        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative overflow-hidden bg-[linear-gradient(180deg,rgba(232,209,164,0.95)_0%,rgba(241,225,188,0.9)_48%,rgba(243,218,206,0.92)_100%)]">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute -top-16 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[#F7E5A7]/45 blur-3xl" />
-            <div className="absolute bottom-0 right-[8%] h-40 w-40 rounded-full bg-[#D6A94A]/20 blur-3xl" />
-          </div>
+        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative overflow-hidden">
           <h1
-            className="relative font-serif-chronakis text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto w-full max-w-[21rem] sm:max-w-5xl leading-[1.08]"
+            className="font-serif-chronakis text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto w-full max-w-[21rem] sm:max-w-5xl leading-[1.08]"
           >
             {lang === 'ru' ? (
               <>
@@ -479,15 +488,15 @@ export default function YuryEventPage() {
               </>
             )}
           </h1>
-          <p className="relative font-serif-chronakis text-[15px] sm:text-lg md:text-xl max-w-[18rem] sm:max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
+          <p className="font-serif-chronakis text-[15px] sm:text-lg md:text-xl max-w-[18rem] sm:max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
             {T.hero_subtitle[lang]}
           </p>
-          <div className="relative flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mb-10">
             {(lang === 'ru'
               ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
               : ['For founders', 'For HR and People teams', 'For leadership teams']
             ).map((item) => (
-              <span key={item} className="border border-black/15 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-[#F8E8C4] max-w-[calc(100vw-3rem)] leading-relaxed">
+              <span key={item} className="border border-black/15 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-[#EFE5DE] max-w-[calc(100vw-3rem)] leading-relaxed">
                 {item}
               </span>
             ))}
@@ -496,12 +505,12 @@ export default function YuryEventPage() {
             href="https://t.me/chikhalov2"
             target="_blank"
             rel="noreferrer"
-            className="relative inline-flex items-center gap-3 bg-[#1E160A] text-[#F8E8C4] px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#6D4C12] transition-colors"
+            className="inline-flex items-center gap-3 bg-black text-[#F3DACE] px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#E83626] transition-colors"
           >
             <CalendarCheck className="w-4 h-4" />
             {T.final_cta_button[lang]}
           </a>
-          <p className="relative font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60 mt-10">
+          <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60 mt-10">
             {T.hero_caption[lang]}
           </p>
         </section>
