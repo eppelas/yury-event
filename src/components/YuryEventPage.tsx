@@ -38,8 +38,8 @@ const T = {
   menu_details: { ru: 'Подход & Стоимость', en: 'Approach & Pricing' },
   menu_team: { ru: 'Наша Команда', en: 'Our Team' },
   menu_clients: { ru: 'Отзывы', en: 'Reviews' },
-  hero_title_1: { ru: 'Создаём аутентичное', en: 'Creating authentic' },
-  hero_title_2: { ru: 'мероприятие', en: 'events' },
+  hero_title_1: { ru: 'Создаём аутентичное мероприятие', en: 'Creating an authentic event' },
+  hero_title_2: { ru: 'для вашей компании', en: 'for your company' },
   hero_subtitle: { 
     ru: 'Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.', 
     en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
@@ -252,20 +252,6 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
     <div className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[12rem] md:max-w-none">
       {T.header_title[lang]}
     </div>
-    
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
-      <div className="flex flex-col items-center justify-center relative hover:-translate-y-1 transition-transform cursor-pointer">
-        <svg viewBox="0 0 24 24" className="w-8 text-black opacity-30 absolute -top-5" overflow="visible">
-          <path d="M12,24 C7,17 7,10 12,3 C17,-4 17,-11 12,-18" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" />
-          <path d="M6,20 C2,14 2,8 6,2 C10,-4 10,-10 6,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
-          <path d="M18,20 C14,14 14,8 18,2 C22,-4 22,-10 18,-16" stroke="currentColor" strokeWidth="0.75" fill="none" strokeLinecap="round" opacity="0.6" />
-        </svg>
-        <div className="font-serif-chronakis italic text-3xl font-medium tracking-wider relative z-10 pt-2">
-          Steam<span className="opacity-80">X</span>
-        </div>
-      </div>
-    </div>
-
     <div className="flex items-center gap-4 md:gap-8 shrink-0">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
