@@ -31,7 +31,7 @@ const ChronakisStyles = () => (
 const T = {
   header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
-  book: { ru: 'Забронировать', en: 'Book' },
+  book: { ru: 'Обсудить выезд', en: 'Discuss retreat' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
   menu_formats: { ru: 'Форматы', en: 'Formats' },
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
@@ -41,12 +41,16 @@ const T = {
   hero_title_1: { ru: 'Создаём аутентичное мероприятие', en: 'Creating an authentic event' },
   hero_title_2: { ru: 'для вашей компании', en: 'for your company' },
   hero_subtitle: { 
-    ru: 'Позволяющее одновременно получить незабываемый опыт, отдохнуть, восстановиться и наиболее эффективно решить бизнес-задачи.', 
-    en: 'Allowing you to simultaneously get an unforgettable experience, relax, recover, and effectively solve business tasks.' 
+    ru: 'Проектируем стратегические и командные выезды, где бизнес-задачи решаются через сильный опыт, восстановление и живую работу с командой.',
+    en: 'We design strategy and team retreats where business goals are solved through a strong shared experience, recovery, and real team work.'
   },
   hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
-  fab_book: { ru: 'ЗАБРОНИРОВАТЬ', en: 'BOOK' },
+  fab_book: { ru: 'ОБСУДИТЬ', en: 'DISCUSS' },
   fab_retreat: { ru: 'ВЫЕЗД', en: 'RETREAT' },
+  hero_trust: {
+    ru: ['200+ выездов', 'Команды Profi.ru, Yandex, Raiffeisen', 'Стратегия + восстановление + организация'],
+    en: ['200+ retreats', 'Teams from Profi.ru, Yandex, Raiffeisen', 'Strategy + recovery + execution'],
+  },
   why_title: { ru: 'Зачем нужны корпоративные выезды?', en: 'Why host a corporate retreat?' },
   why_items: {
     ru: [
@@ -210,11 +214,11 @@ const T = {
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
   team: {
     ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury.jpg", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
+      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury-original.png", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
       { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
     ],
     en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury.jpg", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
+      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury-original.png", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
@@ -248,22 +252,31 @@ const T = {
 type Lang = 'ru' | 'en';
 
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
-  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-4">
-    <div className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.18em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[12rem] md:max-w-none">
+  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-3 md:gap-4">
+    <div className="min-w-0 font-sans-chronakis text-[10px] md:text-xs tracking-[0.14em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[10.5rem] md:max-w-none">
       {T.header_title[lang]}
     </div>
-    <div className="flex items-center gap-4 md:gap-8 shrink-0">
+    <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center gap-3 md:gap-8 shrink-0">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
       </div>
-      <button 
+      <button
+        type="button"
         onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
+        aria-label={lang === 'ru' ? 'Switch to English' : 'Переключить на русский'}
         className="font-sans-chronakis text-xs tracking-widest font-bold uppercase hover:opacity-60 transition-opacity border-b border-black pb-0.5 w-6 text-center"
       >
         {lang === 'ru' ? 'EN' : 'RU'}
       </button>
-      <Menu className="w-6 h-6 cursor-pointer" onClick={() => setIsMenuOpen(true)} />
+      <button
+        type="button"
+        onClick={() => setIsMenuOpen(true)}
+        aria-label={lang === 'ru' ? 'Открыть меню' : 'Open menu'}
+        className="hover:opacity-60 transition-opacity"
+      >
+        <Menu className="w-6 h-6" />
+      </button>
     </div>
   </header>
 );
@@ -278,7 +291,12 @@ const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; o
         transition={{ duration: 0.3 }}
         className="fixed inset-0 z-50 bg-[#E83626] text-[#F3DACE] flex flex-col justify-center items-center"
       >
-        <button onClick={onClose} className="absolute top-8 right-8 text-[#F3DACE] hover:opacity-60 transition-opacity">
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label={lang === 'ru' ? 'Закрыть меню' : 'Close menu'}
+          className="absolute top-8 right-8 text-[#F3DACE] hover:opacity-60 transition-opacity"
+        >
           <X className="w-8 h-8" />
         </button>
         <div className="flex flex-col gap-8 text-center font-serif-chronakis text-4xl md:text-6xl">
@@ -355,13 +373,18 @@ const ListItem = ({ number, title, description }: { key?: number | string, numbe
 const ToggleSection = ({ title, content }: { key?: number | string, title: string, content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border-b border-black/10 py-6 cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-      <div className="flex justify-between items-center group">
+    <div className="border-b border-black/10 py-6">
+      <button
+        type="button"
+        className="flex w-full justify-between items-center group text-left"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <h3 className="font-serif-chronakis text-2xl group-hover:text-[#E83626] transition-colors">{title}</h3>
         <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
           <ChevronDown className="w-6 h-6" />
         </motion.div>
-      </div>
+      </button>
       <motion.div 
         initial={false}
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
@@ -445,7 +468,7 @@ export default function YuryEventPage() {
         href="https://t.me/chikhalov2"
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 w-24 h-24 md:w-36 md:h-36 bg-[#E83626] rounded-full flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-[9px] md:text-[11px] tracking-widest shadow-lg hover:scale-105 transition-transform"
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 w-24 h-24 md:w-36 md:h-36 bg-[#E83626] rounded-full hidden md:flex flex-col items-center justify-center text-white font-sans-chronakis font-bold text-[9px] md:text-[11px] tracking-widest shadow-lg hover:scale-105 transition-transform"
         animate={{ rotate: [-18, 18, -18] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -456,38 +479,54 @@ export default function YuryEventPage() {
       <main className="pl-0 md:pl-12 pt-20 md:pt-24">
         
         {/* Hero Title */}
-        <section className="py-20 md:py-24 px-5 md:px-16 text-center border-b border-black/10 relative overflow-hidden">
-          <h1
-            className="font-serif-chronakis text-[2rem] sm:text-4xl md:text-6xl lg:text-7xl mb-5 md:mb-6 mx-auto w-full max-w-[21rem] sm:max-w-5xl leading-[1.08]"
-          >
-            {T.hero_title_1[lang]}<br className="hidden md:block" />
-            {T.hero_title_2[lang]}
-          </h1>
-          <p className="font-serif-chronakis text-[15px] sm:text-lg md:text-xl max-w-[18rem] sm:max-w-3xl mx-auto mb-10 md:mb-12 opacity-80 leading-relaxed">
-            {T.hero_subtitle[lang]}
-          </p>
-          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mb-10">
-            {(lang === 'ru'
-              ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
-              : ['For founders', 'For HR and People teams', 'For leadership teams']
-            ).map((item) => (
-              <span key={item} className="border border-black/15 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-[#EFE5DE] max-w-[calc(100vw-3rem)] leading-relaxed">
-                {item}
-              </span>
-            ))}
+        <section className="min-h-[82svh] px-5 md:px-16 py-16 md:py-20 border-b border-black/10 relative overflow-hidden flex items-end">
+          <img
+            src="./process-original.jpg"
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/75" />
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F3DACE] to-transparent opacity-35" />
+
+          <div className="relative z-10 w-full max-w-6xl mx-auto text-[#FFF6E7]">
+            <p className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.28em] uppercase opacity-80 mb-5">
+              {T.hero_caption[lang]}
+            </p>
+            <h1 className="font-serif-chronakis !text-[#FFF6E7] text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl mb-5 md:mb-6 max-w-[22rem] sm:max-w-5xl leading-[1.02] md:leading-[0.98]">
+              {T.hero_title_1[lang]}<br />
+              {T.hero_title_2[lang]}
+            </h1>
+            <p className="font-serif-chronakis text-base md:text-2xl max-w-[20.5rem] md:max-w-3xl mb-8 md:mb-10 leading-relaxed opacity-90">
+              {T.hero_subtitle[lang]}
+            </p>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-4 mb-8">
+              {(lang === 'ru'
+                ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
+                : ['For founders', 'For HR and People teams', 'For leadership teams']
+              ).map((item) => (
+                <span key={item} className="border border-white/30 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-black/25 backdrop-blur-sm max-w-[calc(100vw-3rem)] leading-relaxed">
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+              <a
+                href="https://t.me/chikhalov2"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-fit items-center gap-3 bg-[#F3DACE] text-black px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-white transition-colors"
+              >
+                <CalendarCheck className="w-4 h-4" />
+                {T.book[lang]}
+              </a>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-5 font-sans-chronakis text-[10px] tracking-[0.16em] uppercase opacity-85">
+                {T.hero_trust[lang].map((item) => (
+                  <span key={item} className="border-l border-white/30 pl-3">{item}</span>
+                ))}
+              </div>
+            </div>
           </div>
-          <a
-            href="https://t.me/chikhalov2"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-3 bg-black text-[#F3DACE] px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#E83626] transition-colors"
-          >
-            <CalendarCheck className="w-4 h-4" />
-            {T.book[lang]}
-          </a>
-          <p className="font-sans-chronakis text-xs tracking-[0.3em] uppercase opacity-60 mt-10">
-            {T.hero_caption[lang]}
-          </p>
         </section>
 
         {/* Split Section 1: Map & Why */}
@@ -536,7 +575,7 @@ export default function YuryEventPage() {
            <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
               <motion.img 
                 src="./process-original.jpg"
-                alt="Retreat Hero" className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
+                alt={lang === 'ru' ? 'Пространство для стратегического командного выезда' : 'Space for a strategic team retreat'} className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
               <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
            </div>
@@ -646,7 +685,7 @@ export default function YuryEventPage() {
               {T.team[lang].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
                     <div className="aspect-[3/4] w-44 md:w-48 overflow-hidden mb-5 md:mb-6 border border-black/10 relative rounded-t-full">
-                       <img src={guide.image} alt={guide.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                       <img src={guide.image} alt={guide.name} loading="lazy" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
                     </div>
                     <h3 className="font-sans-chronakis font-bold text-lg tracking-widest uppercase mb-2">{guide.name}</h3>
                     <p className="font-serif-chronakis italic opacity-70 mb-4 text-[16px]">{guide.role}</p>
@@ -683,7 +722,7 @@ export default function YuryEventPage() {
                   className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
                   onClick={() => setActiveVideo("STTUYBhyOsM")}
                 >
-                  <img src={`https://img.youtube.com/vi/STTUYBhyOsM/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi Camp 2023" />
+                  <img src={`https://img.youtube.com/vi/STTUYBhyOsM/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Видео-отзыв Profi Camp 2023" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
@@ -702,7 +741,7 @@ export default function YuryEventPage() {
                   className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
                   onClick={() => setActiveVideo("tJ0IKAsBeQA")}
                 >
-                  <img src={`https://img.youtube.com/vi/tJ0IKAsBeQA/hqdefault.jpg`} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Profi ru RC4" />
+                  <img src={`https://img.youtube.com/vi/tJ0IKAsBeQA/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Видео-отзыв о тимбилдинге Profi.ru RC4" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
