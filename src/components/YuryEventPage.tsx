@@ -40,9 +40,17 @@ const T = {
   menu_clients: { ru: 'Отзывы', en: 'Reviews' },
   hero_title_1: { ru: 'Создаём аутентичное мероприятие', en: 'Creating an authentic event' },
   hero_title_2: { ru: 'для вашей компании', en: 'for your company' },
-  hero_subtitle: { 
-    ru: 'Проектируем стратегические и командные выезды, где бизнес-задачи решаются через сильный опыт, восстановление и живую работу с командой.',
-    en: 'We design strategy and team retreats where business goals are solved through a strong shared experience, recovery, and real team work.'
+  hero_bullets: {
+    ru: [
+      { title: 'Незабываемый отдых', target: 'для сотрудников' },
+      { title: 'Душевный формат', target: 'для развития корпоративной культуры' },
+      { title: 'Эффективное решение задач', target: 'для бизнеса' },
+    ],
+    en: [
+      { title: 'A memorable retreat', target: 'for employees' },
+      { title: 'A warm human format', target: 'for corporate culture' },
+      { title: 'Effective problem-solving', target: 'for business' },
+    ],
   },
   hero_caption: { ru: 'КОРПОРАТИВНЫЕ ВЫЕЗДЫ — 2026/27', en: 'CORPORATE RETREATS — 2026/27' },
   fab_book: { ru: 'ОБСУДИТЬ', en: 'DISCUSS' },
@@ -252,11 +260,11 @@ const T = {
 type Lang = 'ru' | 'en';
 
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
-  <header className="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-3 md:gap-4">
+  <header className="fixed top-0 left-0 right-0 z-40 grid grid-cols-[minmax(0,1fr)_auto] items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-3 md:gap-4">
     <div className="min-w-0 font-sans-chronakis text-[10px] md:text-xs tracking-[0.14em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[10.5rem] md:max-w-none">
       {T.header_title[lang]}
     </div>
-    <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center gap-3 md:gap-8 shrink-0">
+    <div className="flex items-center gap-3 md:gap-8 shrink-0">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
@@ -479,7 +487,7 @@ export default function YuryEventPage() {
       <main className="pl-0 md:pl-12 pt-20 md:pt-24">
         
         {/* Hero Title */}
-        <section className="min-h-[82svh] px-5 md:px-16 py-16 md:py-20 border-b border-black/10 relative overflow-hidden flex items-end">
+        <section className="min-h-[82svh] px-4 md:px-16 py-16 md:py-20 border-b border-black/10 relative overflow-hidden flex items-end">
           <img
             src="./process-original.jpg"
             alt=""
@@ -493,13 +501,18 @@ export default function YuryEventPage() {
             <p className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.28em] uppercase opacity-80 mb-5">
               {T.hero_caption[lang]}
             </p>
-            <h1 className="font-serif-chronakis !text-[#FFF6E7] text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl mb-5 md:mb-6 max-w-[22rem] sm:max-w-5xl leading-[1.02] md:leading-[0.98]">
+            <h1 className="font-serif-chronakis !text-[#FFF6E7] text-[1.85rem] sm:text-5xl md:text-7xl lg:text-8xl mb-5 md:mb-6 max-w-[20.5rem] sm:max-w-5xl leading-[1.02] md:leading-[0.98]">
               {T.hero_title_1[lang]}<br />
               {T.hero_title_2[lang]}
             </h1>
-            <p className="font-serif-chronakis text-base md:text-2xl max-w-[20.5rem] md:max-w-3xl mb-8 md:mb-10 leading-relaxed opacity-90">
-              {T.hero_subtitle[lang]}
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mb-8 md:mb-10">
+              {T.hero_bullets[lang].map((item) => (
+                <div key={item.title} className="border-l border-white/35 bg-black/20 backdrop-blur-sm px-4 py-2.5 md:px-5 md:py-4">
+                  <div className="font-serif-chronakis text-lg md:text-2xl leading-tight mb-1">{item.title}</div>
+                  <div className="font-sans-chronakis text-[10px] md:text-[11px] tracking-[0.18em] uppercase opacity-80">{item.target}</div>
+                </div>
+              ))}
+            </div>
             <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-4 mb-8">
               {(lang === 'ru'
                 ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
