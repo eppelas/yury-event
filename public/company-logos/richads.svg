@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="96" viewBox="0 0 280 96" role="img" aria-labelledby="title">
+  <title id="title">RichAds</title>
+  <rect width="280" height="96" rx="0" fill="none"/>
+  <path d="M24 68V28h28c16 0 27 8 27 22 0 12-9 20-22 21l25 27H62L39 72h-3v26H24Z" fill="#181818" transform="scale(.72) translate(10 3)"/>
+  <text x="74" y="62" fill="#181818" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="800" letter-spacing="-1">RichAds</text>
+</svg>

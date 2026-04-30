@@ -25,6 +25,22 @@ const ChronakisStyles = () => (
       background-image: radial-gradient(#000 1px, transparent 1px);
       background-size: 4px 4px;
     }
+
+    @keyframes logo-marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .logo-marquee-track {
+      animation: logo-marquee 30s linear infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-marquee-track {
+        animation: none;
+        transform: none;
+      }
+    }
   `}</style>
 );
 
@@ -258,6 +274,17 @@ const T = {
 }
 
 type Lang = 'ru' | 'en';
+
+const trustedLogos = [
+  { name: 'Raiffeisen Bank', src: './company-logos/raiffeisen.svg' },
+  { name: 'Yandex', src: './company-logos/yandex.svg' },
+  { name: 'Aviasales', src: './company-logos/aviasales.png' },
+  { name: 'Miro', src: './company-logos/miro.svg' },
+  { name: 'Profi.ru', src: './company-logos/profi.svg' },
+  { name: 'Subsquid', src: './company-logos/subsquid.svg' },
+  { name: 'RichAds', src: './company-logos/richads.svg' },
+  { name: 'Zerocoder', src: './company-logos/zerocoder.svg' },
+];
 
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
   <header className="fixed top-0 left-0 right-0 z-40 grid grid-cols-[minmax(0,1fr)_auto] items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-3 md:gap-4">
@@ -696,20 +723,29 @@ export default function YuryEventPage() {
         </section>
 
         {/* Clients */}
-        <section id="clients" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
-           <div className="text-center mb-16">
-              <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.trusted_title[lang]}</h2>
-              <div className="w-24 h-[1px] bg-black mx-auto" />
+        <section id="clients" className="py-10 md:py-12 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
+           <div className="flex items-center gap-5 md:gap-10 mb-7 md:mb-9 px-5 md:px-16">
+              <h2 className="font-sans-chronakis text-xs md:text-sm font-bold uppercase tracking-[0.28em] md:tracking-[0.34em] whitespace-nowrap">{T.trusted_title[lang]}</h2>
+              <div className="h-[1px] bg-black/15 flex-1" />
            </div>
-           <div className="flex flex-wrap justify-center flex-row max-w-5xl mx-auto gap-x-6 md:gap-x-12 gap-y-8 md:gap-y-12 opacity-70 font-sans-chronakis text-base md:text-3xl font-bold uppercase tracking-[0.14em] md:tracking-widest text-center">
-             <span>Raiffeisen BANK</span><span className="opacity-30">•</span>
-             <span>Yandex</span><span className="opacity-30">•</span>
-             <span>Aviasales</span><span className="opacity-30">•</span>
-             <span>Miro</span><span className="opacity-30">•</span>
-             <span>Profi.ru</span><span className="opacity-30">•</span>
-             <span>Subsquid</span><span className="opacity-30">•</span>
-             <span>RichAds</span><span className="opacity-30">•</span>
-             <span>Zerocoder</span>
+           <div className="relative overflow-hidden">
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#F3DACE] to-transparent z-10" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#F3DACE] to-transparent z-10" />
+              <div className="logo-marquee-track flex w-max gap-8 md:gap-12 px-5 md:px-16">
+                 {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+                    <div
+                      key={`${logo.name}-${i}`}
+                      className="h-16 md:h-20 min-w-36 md:min-w-48 flex items-center justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+                    >
+                      <img
+                        src={logo.src}
+                        alt={logo.name}
+                        loading="lazy"
+                        className="max-h-9 md:max-h-12 max-w-32 md:max-w-44 object-contain"
+                      />
+                    </div>
+                 ))}
+              </div>
            </div>
         </section>
 
