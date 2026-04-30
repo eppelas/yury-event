@@ -56,8 +56,8 @@ const T = {
   fab_book: { ru: 'ОБСУДИТЬ', en: 'DISCUSS' },
   fab_retreat: { ru: 'ВЫЕЗД', en: 'RETREAT' },
   hero_trust: {
-    ru: ['200+ выездов', 'Команды Profi.ru, Yandex, Raiffeisen', 'Стратегия + восстановление + организация'],
-    en: ['200+ retreats', 'Teams from Profi.ru, Yandex, Raiffeisen', 'Strategy + recovery + execution'],
+    ru: ['2000+ человек приняли участие', 'Команды Profi.ru, Yandex, Raiffeisen', 'Стратегия + восстановление + организация'],
+    en: ['2000+ people participated', 'Teams from Profi.ru, Yandex, Raiffeisen', 'Strategy + recovery + execution'],
   },
   why_title: { ru: 'Зачем нужны корпоративные выезды?', en: 'Why host a corporate retreat?' },
   why_items: {
