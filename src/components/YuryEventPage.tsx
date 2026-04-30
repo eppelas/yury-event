@@ -294,7 +294,6 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
     <div className="flex items-center gap-3 md:gap-8 shrink-0">
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
-        <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.book[lang]}</a>
       </div>
       <button
         type="button"
@@ -482,6 +481,34 @@ const OutcomeCard = ({ icon: Icon, title, text }: { key?: React.Key; icon: React
   </div>
 );
 
+const TrustedLogosSection = ({ lang }: { lang: Lang }) => (
+  <section id="clients" className="py-10 md:py-12 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
+    <div className="flex items-center gap-5 md:gap-10 mb-7 md:mb-9 px-5 md:px-16">
+      <h2 className="font-sans-chronakis text-xs md:text-sm font-bold uppercase tracking-[0.28em] md:tracking-[0.34em] whitespace-nowrap">{T.trusted_title[lang]}</h2>
+      <div className="h-[1px] bg-black/15 flex-1" />
+    </div>
+    <div className="relative overflow-hidden">
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#F3DACE] to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#F3DACE] to-transparent z-10" />
+      <div className="logo-marquee-track flex w-max gap-8 md:gap-12 px-5 md:px-16">
+        {[...trustedLogos, ...trustedLogos].map((logo, i) => (
+          <div
+            key={`${logo.name}-${i}`}
+            className="h-16 md:h-20 min-w-36 md:min-w-48 flex items-center justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
+          >
+            <img
+              src={logo.src}
+              alt={logo.name}
+              loading="lazy"
+              className="max-h-9 md:max-h-12 max-w-32 md:max-w-44 object-contain"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -555,6 +582,8 @@ export default function YuryEventPage() {
             </div>
           </div>
         </section>
+
+        <TrustedLogosSection lang={lang} />
 
         {/* Split Section 1: Map & Why */}
         <section id="why" className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] border-b border-black/10 pt-16 md:pt-24">
@@ -719,33 +748,6 @@ export default function YuryEventPage() {
                     <p className="font-sans-chronakis text-sm opacity-60 leading-relaxed max-w-xs">{guide.desc}</p>
                  </div>
               ))}
-           </div>
-        </section>
-
-        {/* Clients */}
-        <section id="clients" className="py-10 md:py-12 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
-           <div className="flex items-center gap-5 md:gap-10 mb-7 md:mb-9 px-5 md:px-16">
-              <h2 className="font-sans-chronakis text-xs md:text-sm font-bold uppercase tracking-[0.28em] md:tracking-[0.34em] whitespace-nowrap">{T.trusted_title[lang]}</h2>
-              <div className="h-[1px] bg-black/15 flex-1" />
-           </div>
-           <div className="relative overflow-hidden">
-              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#F3DACE] to-transparent z-10" />
-              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#F3DACE] to-transparent z-10" />
-              <div className="logo-marquee-track flex w-max gap-8 md:gap-12 px-5 md:px-16">
-                 {[...trustedLogos, ...trustedLogos].map((logo, i) => (
-                    <div
-                      key={`${logo.name}-${i}`}
-                      className="h-16 md:h-20 min-w-36 md:min-w-48 flex items-center justify-center opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300"
-                    >
-                      <img
-                        src={logo.src}
-                        alt={logo.name}
-                        loading="lazy"
-                        className="max-h-9 md:max-h-12 max-w-32 md:max-w-44 object-contain"
-                      />
-                    </div>
-                 ))}
-              </div>
            </div>
         </section>
 
