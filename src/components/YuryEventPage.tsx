@@ -110,75 +110,24 @@ const T = {
     ],
   },
   process_title: { ru: 'Пример Дизайна Процесса', en: 'Process Design Example' },
-  process_intro: {
-    ru: 'Мы не начинаем с набора активностей. Сначала определяем, что должно измениться в команде, а затем собираем последовательность, где состояние, коммуникация и бизнес-работа усиливают друг друга.',
-    en: 'We do not start with a list of activities. First we define what should shift in the team, then design a sequence where state, communication, and business work reinforce each other.',
-  },
-  process_cases: {
+  process_req: { ru: 'Запрос: "Сформулировать новое видение развития компании на 2026-2030 годы"', en: 'Request: "Formulate a new development vision for 2026-2030"' },
+  process_items: {
     ru: [
-      {
-        label: 'Кейс 01',
-        title: 'Стратегический выезд в период трансформации',
-        context: 'Производственная компания меняла систему управления и внедряла agile-подходы. Задача была не просто сформулировать стратегию, а помочь людям принять новую логику работы.',
-        design: [
-          'Сначала сняли операционное напряжение через практики состояния и телесного включения.',
-          'Затем усилили качество коммуникации: слышать друг друга, договариваться, говорить прямо и оставаться в контакте.',
-          'После этого перевели команду в предпринимательское мышление и только затем вышли в стратегическую работу.',
-        ],
-        result: [
-          'Команда приняла изменения и новую управленческую логику.',
-          'Стратегическая сессия прошла быстрее, глубже и с настоящими договорённостями.',
-          'Финальный поход в горы закрепил ощущение цельного сильного опыта.',
-        ],
-      },
-      {
-        label: 'Кейс 02',
-        title: 'Настоящие командные разговоры вне конференц-зала',
-        context: 'Важные темы часто не поднимаются в классическом формате “зал — флипчарт”. Нужен контекст, где уходит формальность и появляется больше искренности.',
-        design: [
-          'Часть сессий переносим в природную среду: лес, горы, берег, городскую набережную.',
-          'Команда физически выходит из привычного пространства, поэтому снижается игра ролей.',
-          'В безопасном формате поднимаются напряжения, ожидания, благодарность и сложные, но важные темы.',
-        ],
-        result: [
-          'Появляется реальный контакт внутри команды.',
-          'Операционные и стратегические обсуждения идут между людьми, которые действительно слышат друг друга.',
-          'Бизнес-решения становятся не формальными, а прожитыми и принятыми командой.',
-        ],
-      },
+      '1. Погружение в момент. Трансфер, чекины. Результат: Переход в настоящий момент.',
+      '2. Глубинное исследование. Фасилитация. Результат: Список ключевых вызовов.',
+      '3. Прорыв в будущее. Форсайт-сессии. Результат: Драфт долгосрочного видения.',
+      '4. Новое видение. Стратегические сессии (U-theory). Результат: Конкретные шаги.',
+      '5. Празднование. Ужины, вечеринки. Результат: Радость и сплочение.',
+      '6. Завершение. Рефлексия, мерч. Результат: Вдохновение.'
     ],
     en: [
-      {
-        label: 'Case 01',
-        title: 'Strategic retreat during transformation',
-        context: 'A manufacturing company was changing its management system and adopting agile practices. The goal was not just to write a strategy, but to help people accept a new way of working.',
-        design: [
-          'First we lowered operational tension through state work and embodied practices.',
-          'Then we improved communication: listening, aligning, speaking directly, and staying in contact.',
-          'Only after that did we move into entrepreneurial thinking and strategic work.',
-        ],
-        result: [
-          'The team accepted the changes and the new management logic.',
-          'The strategy session became faster, deeper, and led to real agreements.',
-          'A final mountain hike anchored the experience as one coherent journey.',
-        ],
-      },
-      {
-        label: 'Case 02',
-        title: 'Real team conversations outside the meeting room',
-        context: 'Important topics rarely surface in the classic “conference room and flipchart” format. Teams need a context where formality drops and honesty becomes easier.',
-        design: [
-          'Some sessions move into nature: forest, mountains, shoreline, or an open city setting.',
-          'The team physically leaves the familiar environment, reducing role-play and status games.',
-          'A safe format helps surface tension, expectations, appreciation, and difficult but important themes.',
-        ],
-        result: [
-          'Real contact appears inside the team.',
-          'Operational and strategic discussions happen between people who truly hear each other.',
-          'Business decisions become lived and accepted, not merely formal.',
-        ],
-      },
-    ],
+      '1. Immersion. Transfer, check-ins. Result: Transition to the present moment.',
+      '2. Deep exploration. Facilitation. Result: List of key challenges.',
+      '3. Breakthrough to the future. Foresight sessions. Result: Draft of long-term vision.',
+      '4. New vision. Strategic sessions (U-theory). Result: Concrete steps.',
+      '5. Celebration. Dinners, parties. Result: Joy and unity.',
+      '6. Completion. Reflection, merch. Result: Inspiration.'
+    ]
   },
   formats_title: { ru: 'Форматы, которые можно собрать под задачу', en: 'Formats tailored to your goal' },
   formats_intro: {
@@ -532,53 +481,6 @@ const OutcomeCard = ({ icon: Icon, title, text }: { key?: React.Key; icon: React
   </div>
 );
 
-const ProcessCaseCard = ({ caseItem, lang }: { caseItem: typeof T.process_cases.ru[number]; lang: Lang }) => {
-  const labels = {
-    design: lang === 'ru' ? 'Как собрали процесс' : 'How we designed it',
-    result: lang === 'ru' ? 'Что изменилось' : 'What changed',
-  };
-
-  return (
-    <article className="bg-[#F3DACE] border border-black/10 p-5 md:p-8 flex flex-col gap-7">
-      <div>
-        <div className="font-sans-chronakis text-[10px] tracking-[0.32em] uppercase opacity-55 mb-4">{caseItem.label}</div>
-        <h3 className="font-serif-chronakis text-3xl md:text-4xl leading-tight mb-5">{caseItem.title}</h3>
-        <p className="font-serif-chronakis text-lg md:text-xl leading-relaxed opacity-80">{caseItem.context}</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1fr] gap-6">
-        <div>
-          <div className="font-sans-chronakis text-[10px] tracking-[0.28em] uppercase font-bold mb-4">
-            {labels.design}
-          </div>
-          <div className="space-y-3">
-            {caseItem.design.map((item, i) => (
-              <div key={item} className="flex gap-3 text-sm leading-relaxed font-sans-chronakis">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black text-[#F3DACE] text-[10px] font-bold">{i + 1}</span>
-                <span className="opacity-80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-[#EFE5DE] border border-black/10 p-5">
-          <div className="font-sans-chronakis text-[10px] tracking-[0.28em] uppercase font-bold mb-4">
-            {labels.result}
-          </div>
-          <div className="space-y-3">
-            {caseItem.result.map((item) => (
-              <div key={item} className="flex gap-3 text-sm leading-relaxed font-sans-chronakis">
-                <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[#E83626]" />
-                <span className="opacity-80">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-};
-
 const TrustedLogosSection = ({ lang }: { lang: Lang }) => (
   <section id="clients" className="py-10 md:py-12 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
     <div className="flex items-center gap-5 md:gap-10 mb-7 md:mb-9 px-5 md:px-16">
@@ -724,50 +626,27 @@ export default function YuryEventPage() {
           </div>
         </section>
 
-        <section id="process" className="py-20 md:py-24 px-5 md:px-16 border-b border-black/10 bg-[#EFE5DE]">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 md:gap-16 items-end mb-10 md:mb-14">
-              <div>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm">✓</div>
-                  <p className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">{T.process_title[lang]}</p>
-                </div>
-                <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">
-                  {lang === 'ru' ? 'Кейсы, где формат рождается из задачи' : 'Cases where the format follows the task'}
-                </h2>
-              </div>
-              <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-80">
-                {T.process_intro[lang]}
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden border border-black/10 mb-8 md:mb-10 h-56 md:h-72">
-              <motion.img
+        {/* Full Width Image Section - Process */}
+        <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
+           <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
+              <motion.img 
                 src="./process-original.jpg"
-                alt={lang === 'ru' ? 'Пространство для стратегического командного выезда' : 'Space for a strategic team retreat'}
-                className="w-full h-full object-cover sepia-[.25] grayscale-[.15]"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 1 }}
+                alt={lang === 'ru' ? 'Пространство для стратегического командного выезда' : 'Space for a strategic team retreat'} className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/10 to-transparent pointer-events-none" />
-              <div className="absolute left-5 bottom-5 md:left-8 md:bottom-8 text-[#FFF6E7] max-w-xl">
-                <p className="font-sans-chronakis text-[10px] tracking-[0.3em] uppercase mb-3 opacity-75">
-                  {lang === 'ru' ? 'Принцип дизайна' : 'Design principle'}
-                </p>
-                <p className="font-serif-chronakis text-2xl md:text-4xl leading-tight">
-                  {lang === 'ru'
-                    ? 'Сначала меняем качество контакта, затем переходим к решениям.'
-                    : 'First shift the quality of contact, then move into decisions.'}
-                </p>
+              <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
+           </div>
+           <div className="p-5 md:p-8 lg:p-16 flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-8">
+                 <div className="w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm">✓</div>
+                 <h2 className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">{T.process_title[lang]}</h2>
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-6">
-              {T.process_cases[lang].map((caseItem) => (
-                <ProcessCaseCard key={caseItem.label} caseItem={caseItem} lang={lang} />
-              ))}
-            </div>
-          </div>
+              <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed mb-6 font-bold">
+                 {T.process_req[lang]}
+              </p>
+              <ul className="font-sans-chronakis text-sm mt-4 opacity-80 leading-relaxed max-w-md space-y-4">
+                 {T.process_items[lang].map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+           </div>
         </section>
 
         <section id="formats" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
