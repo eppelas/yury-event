@@ -510,16 +510,6 @@ export default function YuryEventPage() {
                 </div>
               ))}
             </div>
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-4 mb-8">
-              {(lang === 'ru'
-                ? ['Для собственников', 'Для HR и People-команд', 'Для leadership-команд']
-                : ['For founders', 'For HR and People teams', 'For leadership teams']
-              ).map((item) => (
-                <span key={item} className="border border-white/30 px-4 py-2 font-sans-chronakis text-[10px] tracking-[0.12em] md:tracking-[0.18em] uppercase bg-black/25 backdrop-blur-sm max-w-[calc(100vw-3rem)] leading-relaxed">
-                  {item}
-                </span>
-              ))}
-            </div>
             <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
               <a
                 href="https://t.me/chikhalov2"
