@@ -498,9 +498,6 @@ export default function YuryEventPage() {
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F3DACE] to-transparent opacity-35" />
 
           <div className="relative z-10 w-full max-w-6xl mx-auto text-[#FFF6E7]">
-            <p className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.28em] uppercase opacity-80 mb-5">
-              {T.hero_caption[lang]}
-            </p>
             <h1 className="font-serif-chronakis !text-[#FFF6E7] text-[1.85rem] sm:text-5xl md:text-7xl lg:text-8xl mb-5 md:mb-6 max-w-[20.5rem] sm:max-w-5xl leading-[1.02] md:leading-[0.98]">
               {T.hero_title_1[lang]}<br />
               {T.hero_title_2[lang]}
