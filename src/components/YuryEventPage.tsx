@@ -31,7 +31,7 @@ const ChronakisStyles = () => (
 const T = {
   header_title: { ru: 'СТРАТЕГИЧЕСКИЕ И КОМАНДНЫЕ ВЫЕЗДЫ', en: 'STRATEGY & TEAM RETREATS' },
   contact: { ru: 'Связаться с нами', en: 'Contact Us' },
-  book: { ru: 'Обсудить выезд', en: 'Discuss retreat' },
+  book: { ru: 'Узнать детали', en: 'Get details' },
   menu_why: { ru: 'Зачем это нужно?', en: 'Why do you need it?' },
   menu_formats: { ru: 'Форматы', en: 'Formats' },
   menu_process: { ru: 'Дизайн Процесса', en: 'Process Design' },
