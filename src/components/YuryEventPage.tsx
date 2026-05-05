@@ -246,17 +246,32 @@ const T = {
       { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
     ]
   },
-  reviews_video_title: { ru: 'Видео-отзывы о выездах', en: 'Video Reviews from Retreats' },
-  reviews: {
+  event_videos_title: { ru: 'Видео примеры наших мероприятий', en: 'Video examples of our events' },
+  event_videos_intro: {
+    ru: 'Живые фрагменты атмосферы, командной динамики и формата выездов.',
+    en: 'Live glimpses of the atmosphere, team dynamics, and retreat format.',
+  },
+  event_videos: {
     ru: [
-      { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder" },
-      { text: "«Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии»", author: "Ведущий дизайнер", role: "Profi.ru" },
-      { text: "«Я восхищаюсь тем, насколько ребята влюбленны в свое дело и насколько глубоко они продумывают все детали»", author: "Руководитель", role: "Тинькофф" },
+      { id: 'Y9ctS5K4Y24', title: 'Командный выезд: атмосфера и формат', meta: 'Видео пример мероприятия' },
+      { id: 'UQnCY0vA6B4?start=10', title: 'Ретрит для команды: процесс и пространство', meta: 'Видео пример мероприятия' },
     ],
     en: [
-      { text: "«This experience became a true celebration and reward for our team! After the retreat, the team was inspired to reach the next business level»", author: "Vlad Mikhalev", role: "Founder of Zerocoder" },
-      { text: "«The team did the impossible and organized one of the best experiences we could get in Georgia»", author: "Lead Designer", role: "Profi.ru" },
-      { text: "«I admire how much these guys love what they do and how deeply they think through all the details»", author: "Head of Unit", role: "Tinkoff" },
+      { id: 'Y9ctS5K4Y24', title: 'Team retreat: atmosphere and format', meta: 'Event video example' },
+      { id: 'UQnCY0vA6B4?start=10', title: 'Team retreat: process and space', meta: 'Event video example' },
+    ],
+  },
+  reviews_title: { ru: 'Отзывы наших клиентов', en: 'Client Reviews' },
+  reviews: {
+    ru: [
+      { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder", image: "./dmitry.jpg" },
+      { text: "«Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии»", author: "Ведущий дизайнер", role: "Profi.ru", image: "./process-original.jpg" },
+      { text: "«Я восхищаюсь тем, насколько ребята влюбленны в свое дело и насколько глубоко они продумывают все детали»", author: "Руководитель", role: "Тинькофф", image: "./yury-original.png" },
+    ],
+    en: [
+      { text: "«This experience became a true celebration and reward for our team! After the retreat, the team was inspired to reach the next business level»", author: "Vlad Mikhalev", role: "Founder of Zerocoder", image: "./dmitry.jpg" },
+      { text: "«The team did the impossible and organized one of the best experiences we could get in Georgia»", author: "Lead Designer", role: "Profi.ru", image: "./process-original.jpg" },
+      { text: "«I admire how much these guys love what they do and how deeply they think through all the details»", author: "Head of Unit", role: "Tinkoff", image: "./yury-original.png" },
     ]
   },
   footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
@@ -796,54 +811,49 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        {/* Reviews Section (Now AFTER Team) */}
-        <section id="reviews" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
-           <div className="max-w-6xl mx-auto mb-24">
-             <h3 className="font-sans-chronakis font-bold text-lg md:text-2xl uppercase tracking-widest mb-8 md:mb-12 border-l-4 border-[#E83626] pl-4 md:pl-6">{T.reviews_video_title[lang]}</h3>
-             <div className="flex flex-wrap gap-5 md:gap-8">
-                <div 
-                  className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
-                  onClick={() => setActiveVideo("STTUYBhyOsM")}
-                >
-                  <img src={`https://img.youtube.com/vi/STTUYBhyOsM/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Видео-отзыв Profi Camp 2023" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4 right-4 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white shadow-sm" />
-                    <div className="text-white drop-shadow-md">
-                      <div className="font-bold text-sm tracking-wide">Profi Camp 2023</div>
-                      <div className="text-[10px] opacity-90">Chimmynator</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div 
-                  className="w-full md:w-80 aspect-video bg-black rounded-lg overflow-hidden shadow-md relative group cursor-pointer hover:shadow-xl transition-shadow"
-                  onClick={() => setActiveVideo("tJ0IKAsBeQA")}
-                >
-                  <img src={`https://img.youtube.com/vi/tJ0IKAsBeQA/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" alt="Видео-отзыв о тимбилдинге Profi.ru RC4" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-12 h-12 bg-[#E83626] rounded-full flex items-center justify-center text-white pl-1 shadow-lg group-hover:scale-110 transition-transform">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6"><path d="M8 5v14l11-7z" /></svg>
-                    </div>
-                  </div>
-                  <div className="absolute top-4 left-4 right-4 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-white shadow-sm" />
-                    <div className="text-white drop-shadow-md">
-                      <div className="font-bold text-sm tracking-wide">тимбилдинг Profi ru RC4</div>
-                      <div className="text-[10px] opacity-90">Chimmynator</div>
-                    </div>
-                  </div>
-                </div>
-             </div>
+        <section id="reviews" className="py-20 md:py-24 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
+           <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
+             <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
+             <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-5">{T.event_videos_title[lang]}</h2>
+             <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-80 max-w-2xl">{T.event_videos_intro[lang]}</p>
            </div>
+           <div className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar">
+             {T.event_videos[lang].map((video) => {
+               const videoId = video.id.split('?')[0];
+               return (
+                 <button
+                   key={video.id}
+                   type="button"
+                   className="snap-center shrink-0 w-[82vw] md:w-[62vw] lg:w-[52vw] aspect-video bg-black overflow-hidden relative group text-left"
+                   onClick={() => setActiveVideo(video.id)}
+                 >
+                   <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" alt={video.title} />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                   <div className="absolute inset-0 flex items-center justify-center">
+                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
+                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M8 5v14l11-7z" /></svg>
+                     </div>
+                   </div>
+                   <div className="absolute left-5 right-5 bottom-5 text-[#FFF6E7]">
+                     <div className="font-sans-chronakis text-[10px] tracking-[0.24em] uppercase opacity-80 mb-2">{video.meta}</div>
+                     <div className="font-serif-chronakis text-2xl md:text-4xl leading-tight">{video.title}</div>
+                   </div>
+                 </button>
+               );
+             })}
+           </div>
+        </section>
 
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
+           <div className="max-w-6xl mx-auto mb-10 md:mb-14">
+             <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.reviews_title[lang]}</h2>
+           </div>
            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
              {T.reviews[lang].map((review, i) => (
-                <div key={i} className="flex flex-col h-full border border-black/10 p-5 md:p-8 bg-[#EFE5DE] hover:-translate-y-2 transition-transform duration-500">
+                <div key={i} className="flex flex-col h-full border border-black/10 p-5 md:p-8 bg-[#F3DACE] hover:-translate-y-2 transition-transform duration-500">
+                  <div className="w-16 h-16 rounded-full overflow-hidden border border-black/10 mb-6">
+                    <img src={review.image} alt={review.author} loading="lazy" className="w-full h-full object-cover grayscale" />
+                  </div>
                   <p className="font-serif-chronakis text-lg md:text-2xl leading-relaxed flex-grow mb-6 md:mb-8">{review.text}</p>
                   <div className="pt-6 border-t border-black/10">
                     <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author}</p>
@@ -854,9 +864,9 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#2F241E] text-[#F3DACE] border-b border-black/10">
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] text-black border-b border-black/10">
           <div className="max-w-5xl mx-auto text-center">
-            <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-6 text-[#F3DACE]">
+            <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-6">
               {T.final_cta_title[lang]}
             </h2>
             <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-90 max-w-3xl mx-auto mb-10">
@@ -866,7 +876,7 @@ export default function YuryEventPage() {
               href="https://t.me/chikhalov2"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-3 bg-[#D8B78F] text-black px-7 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#F3DACE] transition-colors"
+              className="inline-flex items-center gap-3 bg-[#2F241E] text-[#F3DACE] px-7 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-black transition-colors"
             >
               <CalendarCheck className="w-4 h-4" />
               {T.final_cta_button[lang]}
@@ -909,7 +919,7 @@ export default function YuryEventPage() {
             <div className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl relative cursor-default" onClick={e => e.stopPropagation()}>
                <iframe 
                  width="100%" height="100%" 
-                 src={`https://www.youtube.com/embed/${activeVideo}?autoplay=1`}
+                 src={`https://www.youtube.com/embed/${activeVideo}${activeVideo.includes('?') ? '&' : '?'}autoplay=1`}
                  title="Video Playback" frameBorder="0" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen
                  className="absolute inset-0 w-full h-full"
                ></iframe>
