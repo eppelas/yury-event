@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck, ArrowLeft, ArrowRight } from 'lucide-react';
 import { clientReviews } from '../data/reviews/clientReviews';
+import { teamMembers } from '../data/team/teamMembers';
 
 const ChronakisStyles = () => (
   <style>{`
@@ -237,21 +238,7 @@ const T = {
   },
   trusted_title: { ru: 'Нам Доверяют', en: 'Trusted By' },
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
-  team: {
-    ru: [
-      { name: "Юрий Чихалов", role: "Создатель кэмпов / Camp Creator", image: "./yury-original.png", desc: "Основатель fitonfit.ru, ex-PM в profi.ru. Эксперт по телесным (embodiment) практикам и банным церемониям." },
-      { name: "Дмитрий Риман", role: "Серийный предприниматель", image: "./dmitry.jpg", desc: "Основатель Business Community (Бали), провел более 200 выездов для таких клиентов, как Leroy Merlin и Yandex." }
-    ],
-    en: [
-      { name: "Yury Chikhalov", role: "Camp Creator globally", image: "./yury-original.png", desc: "Founder of fitonfit.ru, ex-PM at profi.ru. Expert in Embodiment and bath experiences." },
-      { name: "Dmitry Riman", role: "Serial Entrepreneur", image: "./dmitry.jpg", desc: "Founder of Business Community (Bali), over 200 retreats conducted for clients like Leroy Merlin and Yandex." }
-    ]
-  },
-  event_videos_title: { ru: 'Видео примеры наших мероприятий', en: 'Video examples of our events' },
-  event_videos_intro: {
-    ru: 'Живые фрагменты атмосферы, командной динамики и формата выездов.',
-    en: 'Live glimpses of the atmosphere, team dynamics, and retreat format.',
-  },
+  event_videos_title: { ru: 'Видео примеры', en: 'Video examples' },
   event_videos: {
     ru: [
       { id: 'Y9ctS5K4Y24', title: 'Командный выезд: атмосфера и формат', meta: 'Видео пример мероприятия' },
@@ -562,6 +549,39 @@ const CookieConsent = ({ lang }: { lang: Lang }) => {
   );
 };
 
+const YouTubeThumbnail = ({ videoId, title }: { videoId: string; title: string }) => {
+  const thumbnailSources = [
+    `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`,
+    `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+    `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
+    `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+  ];
+  const [sourceIndex, setSourceIndex] = useState(0);
+
+  useEffect(() => {
+    setSourceIndex(0);
+  }, [videoId]);
+
+  const useNextSource = () => {
+    setSourceIndex((current) => Math.min(current + 1, thumbnailSources.length - 1));
+  };
+
+  return (
+    <img
+      src={thumbnailSources[sourceIndex]}
+      onError={useNextSource}
+      onLoad={(event) => {
+        if (event.currentTarget.naturalWidth < 480) {
+          useNextSource();
+        }
+      }}
+      loading="lazy"
+      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+      alt={title}
+    />
+  );
+};
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -813,15 +833,15 @@ export default function YuryEventPage() {
               <h2 className="font-serif-chronakis text-4xl md:text-5xl mb-4">{T.team_title[lang]}</h2>
               <div className="w-24 h-[1px] bg-black mx-auto" />
            </div>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-2xl mx-auto">
-              {T.team[lang].map((guide, i) => (
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 max-w-4xl mx-auto">
+              {teamMembers[lang].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
-                    <div className="aspect-[3/4] w-44 md:w-48 overflow-hidden mb-5 md:mb-6 border border-black/10 relative rounded-t-full">
-                       <img src={guide.image} alt={guide.name} loading="lazy" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                    <div className="w-56 h-56 md:w-72 md:h-72 overflow-hidden mb-6 md:mb-8 border border-black/10 relative rounded-full bg-[#F3DACE] shadow-sm">
+                       <img src={guide.photo} alt={guide.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     </div>
                     <h3 className="font-sans-chronakis font-bold text-lg tracking-widest uppercase mb-2">{guide.name}</h3>
                     <p className="font-serif-chronakis italic opacity-70 mb-4 text-[16px]">{guide.role}</p>
-                    <p className="font-sans-chronakis text-sm opacity-60 leading-relaxed max-w-xs">{guide.desc}</p>
+                    <p className="font-sans-chronakis text-sm md:text-base opacity-65 leading-relaxed max-w-sm">{guide.description}</p>
                  </div>
               ))}
            </div>
@@ -832,8 +852,7 @@ export default function YuryEventPage() {
              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
                <div>
                  <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
-                 <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-5">{T.event_videos_title[lang]}</h2>
-                 <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-80 max-w-2xl">{T.event_videos_intro[lang]}</p>
+                 <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.event_videos_title[lang]}</h2>
                </div>
                <div className="flex gap-3">
                  <button
@@ -866,15 +885,7 @@ export default function YuryEventPage() {
                    className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
                    onClick={() => setActiveVideo(video.id)}
                  >
-                   <img
-                     src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                     onError={(event) => {
-                       event.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                     }}
-                     loading="lazy"
-                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                     alt={video.title}
-                   />
+                   <YouTubeThumbnail videoId={videoId} title={video.title} />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                    <div className="absolute inset-0 flex items-center justify-center">
                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
