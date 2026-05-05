@@ -22,7 +22,7 @@ export const clientReviews: Record<'ru' | 'en', ClientReview[]> = {
       text: 'Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии',
     },
     {
-      photo: './reviews/tinkoff.jpg',
+      photo: './reviews/tinkoff-lead.jpg',
       company: 'Тинькофф',
       role: 'Руководитель',
       text: 'Я восхищаюсь тем, насколько ребята влюблены в свое дело и насколько глубоко они продумывают все детали',
@@ -43,9 +43,9 @@ export const clientReviews: Record<'ru' | 'en', ClientReview[]> = {
       text: 'The team did the impossible for us and organized one of the best experiences we could have had in Georgia',
     },
     {
-      photo: './reviews/tinkoff.jpg',
+      photo: './reviews/tinkoff-lead.jpg',
       company: 'Tinkoff',
-      role: 'Team Lead',
+      role: 'Head',
       text: 'I admire how much the team loves what they do and how deeply they think through every detail',
     },
   ],
