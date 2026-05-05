@@ -256,10 +256,14 @@ const T = {
     ru: [
       { id: 'Y9ctS5K4Y24', title: 'Командный выезд: атмосфера и формат', meta: 'Видео пример мероприятия' },
       { id: 'UQnCY0vA6B4?start=10', title: 'Ретрит для команды: процесс и пространство', meta: 'Видео пример мероприятия' },
+      { id: 'STTUYBhyOsM', title: 'Profi Camp 2023', meta: 'Видео пример мероприятия' },
+      { id: 'tJ0IKAsBeQA', title: 'Тимбилдинг Profi.ru RC4', meta: 'Видео пример мероприятия' },
     ],
     en: [
       { id: 'Y9ctS5K4Y24', title: 'Team retreat: atmosphere and format', meta: 'Event video example' },
       { id: 'UQnCY0vA6B4?start=10', title: 'Team retreat: process and space', meta: 'Event video example' },
+      { id: 'STTUYBhyOsM', title: 'Profi Camp 2023', meta: 'Event video example' },
+      { id: 'tJ0IKAsBeQA', title: 'Profi.ru RC4 team building', meta: 'Event video example' },
     ],
   },
   reviews_title: { ru: 'Отзывы наших клиентов', en: 'Client Reviews' },
@@ -813,7 +817,7 @@ export default function YuryEventPage() {
                  <button
                    key={video.id}
                    type="button"
-                   className="snap-center shrink-0 w-[82vw] md:w-[62vw] lg:w-[52vw] aspect-video bg-black overflow-hidden relative group text-left"
+                   className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
                    onClick={() => setActiveVideo(video.id)}
                  >
                    <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" alt={video.title} />
