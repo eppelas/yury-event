@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck } from 'lucide-react';
+import { clientReviews } from '../data/reviews/clientReviews';
 
 const ChronakisStyles = () => (
   <style>{`
@@ -262,18 +263,6 @@ const T = {
     ],
   },
   reviews_title: { ru: 'Отзывы наших клиентов', en: 'Client Reviews' },
-  reviews: {
-    ru: [
-      { text: "«Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса»", author: "Влад Михалёв", role: "Основатель Zerocoder", image: "./dmitry.jpg" },
-      { text: "«Ребята сделали для нас просто невозможное и организовали один из лучших опытов, которые мы могли получить в Грузии»", author: "Ведущий дизайнер", role: "Profi.ru", image: "./process-original.jpg" },
-      { text: "«Я восхищаюсь тем, насколько ребята влюбленны в свое дело и насколько глубоко они продумывают все детали»", author: "Руководитель", role: "Тинькофф", image: "./yury-original.png" },
-    ],
-    en: [
-      { text: "«This experience became a true celebration and reward for our team! After the retreat, the team was inspired to reach the next business level»", author: "Vlad Mikhalev", role: "Founder of Zerocoder", image: "./dmitry.jpg" },
-      { text: "«The team did the impossible and organized one of the best experiences we could get in Georgia»", author: "Lead Designer", role: "Profi.ru", image: "./process-original.jpg" },
-      { text: "«I admire how much these guys love what they do and how deeply they think through all the details»", author: "Head of Unit", role: "Tinkoff", image: "./yury-original.png" },
-    ]
-  },
   footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
   final_cta_title: { ru: 'Соберём выезд под вашу задачу', en: 'Let’s shape a retreat around your business question' },
   final_cta_text: {
@@ -849,14 +838,14 @@ export default function YuryEventPage() {
              <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.reviews_title[lang]}</h2>
            </div>
            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 md:gap-8 max-w-6xl mx-auto">
-             {T.reviews[lang].map((review, i) => (
+             {clientReviews[lang].map((review, i) => (
                 <div key={i} className="flex flex-col h-full border border-black/10 p-5 md:p-8 bg-[#F3DACE] hover:-translate-y-2 transition-transform duration-500">
                   <div className="w-16 h-16 rounded-full overflow-hidden border border-black/10 mb-6">
-                    <img src={review.image} alt={review.author} loading="lazy" className="w-full h-full object-cover grayscale" />
+                    <img src={review.photo} alt={review.company} loading="lazy" className="w-full h-full object-cover grayscale" />
                   </div>
-                  <p className="font-serif-chronakis text-lg md:text-2xl leading-relaxed flex-grow mb-6 md:mb-8">{review.text}</p>
+                  <p className="font-serif-chronakis text-lg md:text-2xl leading-relaxed flex-grow mb-6 md:mb-8">«{review.text}»</p>
                   <div className="pt-6 border-t border-black/10">
-                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author}</p>
+                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.company}</p>
                     <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role}</p>
                   </div>
                 </div>
