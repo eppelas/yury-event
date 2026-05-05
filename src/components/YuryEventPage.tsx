@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck } from 'lucide-react';
 
@@ -509,6 +509,51 @@ const TrustedLogosSection = ({ lang }: { lang: Lang }) => (
   </section>
 );
 
+const CookieConsent = ({ lang }: { lang: Lang }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(localStorage.getItem('yury-event-cookie-consent') !== 'accepted');
+  }, []);
+
+  const acceptCookies = () => {
+    localStorage.setItem('yury-event-cookie-consent', 'accepted');
+    setIsVisible(false);
+  };
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="fixed left-4 right-4 bottom-4 md:left-auto md:right-6 md:bottom-6 md:max-w-xl z-[60] bg-[#2F241E] text-[#F3DACE] border border-[#D8B78F]/30 shadow-2xl p-5 md:p-6">
+      <div className="font-sans-chronakis text-[10px] tracking-[0.28em] uppercase opacity-70 mb-3">
+        {lang === 'ru' ? 'Cookies' : 'Cookies'}
+      </div>
+      <p className="font-serif-chronakis text-base md:text-lg leading-relaxed mb-5">
+        {lang === 'ru'
+          ? 'Мы используем cookies, чтобы сайт работал корректно, а также для улучшения его работы. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookies.'
+          : 'We use cookies to keep the website working correctly and improve its experience. By continuing to use the website, you agree to our use of cookies.'}
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-x-5 gap-y-2 font-sans-chronakis text-[10px] tracking-[0.16em] uppercase opacity-80">
+          <a href="./cookie-policy.html" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">
+            {lang === 'ru' ? 'Правила cookies' : 'Cookie policy'}
+          </a>
+          <a href="./privacy.html" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">
+            {lang === 'ru' ? 'Персональные данные' : 'Privacy policy'}
+          </a>
+        </div>
+        <button
+          type="button"
+          onClick={acceptCookies}
+          className="bg-[#D8B78F] text-black px-5 py-3 font-sans-chronakis text-[10px] tracking-widest uppercase font-bold hover:bg-[#F3DACE] transition-colors"
+        >
+          {lang === 'ru' ? 'Хорошо' : 'Accept'}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -829,14 +874,20 @@ export default function YuryEventPage() {
           </div>
         </section>
 
-        <footer className="py-10 md:py-12 px-5 md:px-16 border-t border-black/10 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
-           <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase text-center">
+        <footer className="py-10 md:py-12 px-5 md:px-16 border-t border-black/10 flex flex-col lg:flex-row justify-between items-center gap-6 md:gap-8">
+           <div className="font-sans-chronakis text-xs tracking-[0.2em] font-bold uppercase text-center lg:text-left">
               {T.footer_text[lang]}
            </div>
-           <div className="flex flex-wrap justify-center gap-8 font-sans-chronakis text-xs tracking-widest uppercase opacity-80 items-center">
+           <div className="font-sans-chronakis text-[10px] md:text-xs tracking-[0.14em] uppercase opacity-70 text-center leading-relaxed">
+              <div>ИП ЧИХАЛОВ ЮРИЙ ВАЛЕРЬЕВИЧ</div>
+              <div>ОГРНИП 320774600216938</div>
+              <div>ИНН 772378963005</div>
+           </div>
+           <div className="flex flex-wrap justify-center gap-5 md:gap-8 font-sans-chronakis text-xs tracking-widest uppercase opacity-80 items-center">
               <span>chikhalov@gmail.com</span>
               <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Telegram</a>
               <span>+7(915)212-05-73</span>
+              <a href="./privacy.html" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">Privacy</a>
            </div>
         </footer>
 
@@ -866,6 +917,7 @@ export default function YuryEventPage() {
           </motion.div>
         )}
       </AnimatePresence>
+      <CookieConsent lang={lang} />
     </div>
   );
 }
