@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck } from 'lucide-react';
+import { Menu, ChevronDown, X, Compass, Layers3, Sparkles, ShieldCheck, Target, Users, MessageSquare, Route, Handshake, CalendarCheck, ArrowLeft, ArrowRight } from 'lucide-react';
 import { clientReviews } from '../data/reviews/clientReviews';
 
 const ChronakisStyles = () => (
@@ -568,6 +568,29 @@ export default function YuryEventPage() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
   const [lang, setLang] = useState<Lang>('ru');
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoGalleryRef = useRef<HTMLDivElement>(null);
+
+  const scrollVideoGallery = (direction: 'prev' | 'next') => {
+    const gallery = videoGalleryRef.current;
+    if (!gallery) return;
+
+    const firstCard = gallery.querySelector<HTMLElement>('[data-video-card]');
+    const step = firstCard ? firstCard.offsetWidth + 32 : gallery.clientWidth * 0.8;
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+    const nextLeft = direction === 'next' ? gallery.scrollLeft + step : gallery.scrollLeft - step;
+
+    if (direction === 'next' && nextLeft >= maxScroll - 8) {
+      gallery.scrollTo({ left: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (direction === 'prev' && nextLeft <= 8) {
+      gallery.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      return;
+    }
+
+    gallery.scrollTo({ left: nextLeft, behavior: 'smooth' });
+  };
   
   return (
     <div ref={containerRef} className="h-screen overflow-y-scroll overflow-x-hidden bg-[#F3DACE] text-black selection:bg-black selection:text-[#F3DACE] hide-scrollbar relative">
@@ -806,21 +829,52 @@ export default function YuryEventPage() {
 
         <section id="reviews" className="py-20 md:py-24 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
            <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
-             <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
-             <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-5">{T.event_videos_title[lang]}</h2>
-             <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-80 max-w-2xl">{T.event_videos_intro[lang]}</p>
+             <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
+               <div>
+                 <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
+                 <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-5">{T.event_videos_title[lang]}</h2>
+                 <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed opacity-80 max-w-2xl">{T.event_videos_intro[lang]}</p>
+               </div>
+               <div className="flex gap-3">
+                 <button
+                   type="button"
+                   onClick={() => scrollVideoGallery('prev')}
+                   aria-label={lang === 'ru' ? 'Предыдущее видео' : 'Previous video'}
+                   className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
+                 >
+                   <ArrowLeft className="w-5 h-5" />
+                 </button>
+                 <button
+                   type="button"
+                   onClick={() => scrollVideoGallery('next')}
+                   aria-label={lang === 'ru' ? 'Следующее видео' : 'Next video'}
+                   className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
+                 >
+                   <ArrowRight className="w-5 h-5" />
+                 </button>
+               </div>
+             </div>
            </div>
-           <div className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar">
+           <div ref={videoGalleryRef} className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar scroll-smooth">
              {T.event_videos[lang].map((video) => {
                const videoId = video.id.split('?')[0];
                return (
                  <button
                    key={video.id}
                    type="button"
+                   data-video-card
                    className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
                    onClick={() => setActiveVideo(video.id)}
                  >
-                   <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500" alt={video.title} />
+                   <img
+                     src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                     onError={(event) => {
+                       event.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                     }}
+                     loading="lazy"
+                     className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                     alt={video.title}
+                   />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                    <div className="absolute inset-0 flex items-center justify-center">
                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
