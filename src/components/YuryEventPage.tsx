@@ -270,7 +270,7 @@ const T = {
   footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
   final_cta_title: { ru: 'Соберём выезд под вашу задачу', en: 'Let’s shape a retreat around your business question' },
   final_cta_text: {
-    ru: 'Запланируйте звонок с нашим менеджером, чтобы обсудить детали вашей задачи. Мы соберем под вас сценарий мероприятия — БЕСПЛАТНО.',
+    ru: 'Запланируйте звонок с нашим менеджером, чтобы обсудить детали вашей задачи. Мы соберем под вас сценарий мероприятия — БЕСПЛАТНО',
     en: 'Schedule a call with our manager to discuss your task in detail. We will shape an event scenario for you — free of charge.',
   },
   final_cta_button: { ru: 'Созвониться с менеджером', en: 'Schedule a call' },
