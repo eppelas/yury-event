@@ -262,10 +262,10 @@ const T = {
   footer_text: { ru: 'Стратегические и Командные Выезды © 2026', en: 'Strategy & Team Retreats © 2026' },
   final_cta_title: { ru: 'Соберём выезд под вашу задачу', en: 'Let’s shape a retreat around your business question' },
   final_cta_text: {
-    ru: 'Напишите, сколько человек в команде, где вы хотите провести выезд и какой результат нужен после него. Мы предложим формат, ритм и ориентир по бюджету.',
-    en: 'Tell us your team size, preferred geography, and the result you need after the retreat. We will propose the format, rhythm, and budget range.',
+    ru: 'Запланируйте звонок с нашим менеджером, чтобы обсудить детали вашей задачи. Мы соберем под вас сценарий мероприятия — БЕСПЛАТНО.',
+    en: 'Schedule a call with our manager to discuss your task in detail. We will shape an event scenario for you — free of charge.',
   },
-  final_cta_button: { ru: 'Обсудить выезд', en: 'Discuss retreat' },
+  final_cta_button: { ru: 'Созвониться с менеджером', en: 'Schedule a call' },
   map: {
     ru: ["ВЫЗОВЫ", "КОММУНИКАЦИЯ", "СТРАТЕГИЯ", "РУТИНА", "ДОВЕРИЕ", "ВЫЕЗД", "ВДОХНОВЕНИЕ", "ВИДЕНИЕ", "ЭНЕРГИЯ"],
     en: ["CHALLENGES", "COMMUNICATION", "STRATEGY", "ROUTINE", "TRUST", "RETREAT", "INSPIRATION", "VISION", "ENERGY"]
@@ -809,7 +809,7 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#E83626] text-[#F3DACE] border-b border-black/10">
+        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#2F241E] text-[#F3DACE] border-b border-black/10">
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight mb-6 text-[#F3DACE]">
               {T.final_cta_title[lang]}
@@ -821,7 +821,7 @@ export default function YuryEventPage() {
               href="https://t.me/chikhalov2"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-3 bg-[#F3DACE] text-black px-7 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-black hover:text-[#F3DACE] transition-colors"
+              className="inline-flex items-center gap-3 bg-[#D8B78F] text-black px-7 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-[#F3DACE] transition-colors"
             >
               <CalendarCheck className="w-4 h-4" />
               {T.final_cta_button[lang]}
