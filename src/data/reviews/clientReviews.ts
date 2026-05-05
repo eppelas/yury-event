@@ -1,5 +1,6 @@
 export type ClientReview = {
   photo: string;
+  author?: string;
   company: string;
   role: string;
   text: string;
@@ -8,7 +9,8 @@ export type ClientReview = {
 export const clientReviews: Record<'ru' | 'en', ClientReview[]> = {
   ru: [
     {
-      photo: './reviews/zerocoder.jpg',
+      photo: './reviews/vlad-mikhalev.jpg',
+      author: 'Влад Михалёв',
       company: 'Zerocoder',
       role: 'Основатель',
       text: 'Для нашей команды этот опыт стал настоящим празднованием и наградой! После выезда команда была вдохновлена выходить на следующий уровень развития бизнеса',
@@ -28,7 +30,8 @@ export const clientReviews: Record<'ru' | 'en', ClientReview[]> = {
   ],
   en: [
     {
-      photo: './reviews/zerocoder.jpg',
+      photo: './reviews/vlad-mikhalev.jpg',
+      author: 'Vlad Mikhalev',
       company: 'Zerocoder',
       role: 'Founder',
       text: 'For our team, this experience became a true celebration and reward. After the retreat, the team felt inspired to reach the next level of business growth',

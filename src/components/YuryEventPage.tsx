@@ -849,8 +849,8 @@ export default function YuryEventPage() {
                   </div>
                   <p className="font-serif-chronakis text-lg md:text-2xl leading-relaxed flex-grow mb-6 md:mb-8">«{review.text}»</p>
                   <div className="pt-6 border-t border-black/10">
-                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.company}</p>
-                    <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role}</p>
+                    <p className="font-sans-chronakis font-bold text-[10px] tracking-widest uppercase mb-1">{review.author ?? review.company}</p>
+                    <p className="font-serif-chronakis italic opacity-70 mb-0">{review.role} · {review.company}</p>
                   </div>
                 </div>
              ))}
