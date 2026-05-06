@@ -730,30 +730,15 @@ export default function YuryEventPage() {
               {T.hero_title_1[lang]}<br />
               {T.hero_title_2[lang]}
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mb-8 md:mb-10">
-              {T.hero_bullets[lang].map((item) => (
-                <div key={item.title} className="border-l border-white/35 bg-black/20 backdrop-blur-sm px-4 py-2.5 md:px-5 md:py-4">
-                  <div className="font-serif-chronakis text-lg md:text-2xl leading-tight mb-1">{item.title}</div>
-                  <div className="font-sans-chronakis text-[10px] md:text-[11px] tracking-[0.18em] uppercase opacity-80">{item.target}</div>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
-              <a
-                href="https://t.me/chikhalov2"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex w-fit items-center gap-3 bg-[#F3DACE] text-black px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-white transition-colors"
-              >
-                <CalendarCheck className="w-4 h-4" />
-                {T.book[lang]}
-              </a>
-              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 md:gap-5 font-sans-chronakis text-[10px] tracking-[0.16em] uppercase opacity-85">
-                {T.hero_trust[lang].map((item) => (
-                  <span key={item} className="border-l border-white/30 pl-3">{item}</span>
-                ))}
-              </div>
-            </div>
+            <a
+              href="https://t.me/chikhalov2"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit items-center gap-3 bg-[#F3DACE] text-black px-6 py-4 font-sans-chronakis text-xs tracking-widest uppercase font-bold hover:bg-white transition-colors"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              {T.book[lang]}
+            </a>
           </div>
         </section>
 
