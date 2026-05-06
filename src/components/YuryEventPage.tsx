@@ -332,7 +332,6 @@ const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; o
         <div className="flex flex-col gap-8 text-center font-serif-chronakis text-4xl md:text-6xl">
           <a href="#why" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_why[lang]}</a>
           <a href="#formats" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_formats[lang]}</a>
-          <a href="#process" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_process[lang]}</a>
           <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_details[lang]}</a>
           <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_team[lang]}</a>
           <a href="#reviews" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_clients[lang]}</a>
@@ -790,29 +789,6 @@ export default function YuryEventPage() {
               ))}
             </div>
           </div>
-        </section>
-
-        {/* Full Width Image Section - Process */}
-        <section id="process" className="grid grid-cols-1 lg:grid-cols-2 border-b border-black/10 bg-[#EFE5DE] pt-16 md:pt-24">
-           <div className="h-[42vh] min-h-[18rem] lg:h-auto overflow-hidden relative border-r border-black/10">
-              <motion.img 
-                src="./process-original.jpg"
-                alt={lang === 'ru' ? 'Пространство для стратегического командного выезда' : 'Space for a strategic team retreat'} className="w-full h-full object-cover sepia-[.3] grayscale-[.2]" whileHover={{ scale: 1.05 }} transition={{ duration: 1 }}
-              />
-              <div className="absolute inset-0 bg-[#F3DACE] mix-blend-multiply opacity-20 pointer-events-none" />
-           </div>
-           <div className="p-5 md:p-8 lg:p-16 flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-8">
-                 <div className="w-8 h-8 bg-black text-[#F3DACE] rounded-full flex items-center justify-center font-sans-chronakis font-bold text-sm">✓</div>
-                 <h2 className="font-sans-chronakis font-bold text-sm tracking-widest uppercase">{T.process_title[lang]}</h2>
-              </div>
-              <p className="font-serif-chronakis text-xl md:text-2xl leading-relaxed mb-6 font-bold">
-                 {T.process_req[lang]}
-              </p>
-              <ul className="font-sans-chronakis text-sm mt-4 opacity-80 leading-relaxed max-w-md space-y-4">
-                 {T.process_items[lang].map((item, i) => <li key={i}>{item}</li>)}
-              </ul>
-           </div>
         </section>
 
         <section id="formats" className="py-20 md:py-24 px-5 md:px-16 bg-[#F3DACE] border-b border-black/10">
