@@ -582,6 +582,73 @@ const YouTubeThumbnail = ({ videoId, title }: { videoId: string; title: string }
   );
 };
 
+const VideoExamplesSection = ({
+  lang,
+  videoGalleryRef,
+  onScroll,
+  onSelectVideo,
+}: {
+  lang: Lang;
+  videoGalleryRef: React.RefObject<HTMLDivElement>;
+  onScroll: (direction: 'prev' | 'next') => void;
+  onSelectVideo: (videoId: string) => void;
+}) => (
+  <section className="py-20 md:py-24 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
+    <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
+        <div>
+          <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
+          <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.event_videos_title[lang]}</h2>
+        </div>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => onScroll('prev')}
+            aria-label={lang === 'ru' ? 'Предыдущее видео' : 'Previous video'}
+            className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => onScroll('next')}
+            aria-label={lang === 'ru' ? 'Следующее видео' : 'Next video'}
+            className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
+          >
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div ref={videoGalleryRef} className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar scroll-smooth">
+      {T.event_videos[lang].map((video) => {
+        const videoId = video.id.split('?')[0];
+        return (
+          <button
+            key={video.id}
+            type="button"
+            data-video-card
+            className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
+            onClick={() => onSelectVideo(video.id)}
+          >
+            <YouTubeThumbnail videoId={videoId} title={video.title} />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M8 5v14l11-7z" /></svg>
+              </div>
+            </div>
+            <div className="absolute left-5 right-5 bottom-5 text-[#FFF6E7]">
+              <div className="font-sans-chronakis text-[10px] tracking-[0.24em] uppercase opacity-80 mb-2">{video.meta}</div>
+              <div className="font-serif-chronakis text-2xl md:text-4xl leading-tight">{video.title}</div>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  </section>
+);
+
 export default function YuryEventPage() {
   const [crazyMode, setCrazyMode] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -699,6 +766,13 @@ export default function YuryEventPage() {
             </div>
           </div>
         </section>
+
+        <VideoExamplesSection
+          lang={lang}
+          videoGalleryRef={videoGalleryRef}
+          onScroll={scrollVideoGallery}
+          onSelectVideo={setActiveVideo}
+        />
 
         <section className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 md:gap-16">
@@ -847,62 +921,7 @@ export default function YuryEventPage() {
            </div>
         </section>
 
-        <section id="reviews" className="py-20 md:py-24 bg-[#F3DACE] border-b border-black/10 overflow-hidden">
-           <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
-             <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
-               <div>
-                 <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
-                 <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.event_videos_title[lang]}</h2>
-               </div>
-               <div className="flex gap-3">
-                 <button
-                   type="button"
-                   onClick={() => scrollVideoGallery('prev')}
-                   aria-label={lang === 'ru' ? 'Предыдущее видео' : 'Previous video'}
-                   className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
-                 >
-                   <ArrowLeft className="w-5 h-5" />
-                 </button>
-                 <button
-                   type="button"
-                   onClick={() => scrollVideoGallery('next')}
-                   aria-label={lang === 'ru' ? 'Следующее видео' : 'Next video'}
-                   className="w-12 h-12 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-[#F3DACE] transition-colors"
-                 >
-                   <ArrowRight className="w-5 h-5" />
-                 </button>
-               </div>
-             </div>
-           </div>
-           <div ref={videoGalleryRef} className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar scroll-smooth">
-             {T.event_videos[lang].map((video) => {
-               const videoId = video.id.split('?')[0];
-               return (
-                 <button
-                   key={video.id}
-                   type="button"
-                   data-video-card
-                   className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
-                   onClick={() => setActiveVideo(video.id)}
-                 >
-                   <YouTubeThumbnail videoId={videoId} title={video.title} />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                   <div className="absolute inset-0 flex items-center justify-center">
-                     <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
-                       <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M8 5v14l11-7z" /></svg>
-                     </div>
-                   </div>
-                   <div className="absolute left-5 right-5 bottom-5 text-[#FFF6E7]">
-                     <div className="font-sans-chronakis text-[10px] tracking-[0.24em] uppercase opacity-80 mb-2">{video.meta}</div>
-                     <div className="font-serif-chronakis text-2xl md:text-4xl leading-tight">{video.title}</div>
-                   </div>
-                 </button>
-               );
-             })}
-           </div>
-        </section>
-
-        <section className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
+        <section id="reviews" className="py-20 md:py-24 px-5 md:px-16 bg-[#EFE5DE] border-b border-black/10">
            <div className="max-w-6xl mx-auto mb-10 md:mb-14">
              <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.reviews_title[lang]}</h2>
            </div>
