@@ -238,7 +238,6 @@ const T = {
   },
   trusted_title: { ru: 'Нам Доверяют', en: 'Trusted By' },
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
-  event_videos_label: { ru: 'Видео', en: 'Video' },
   event_videos_title: { ru: 'Видео примеры', en: 'Video examples' },
   event_videos: {
     ru: [
@@ -607,7 +606,6 @@ const VideoExamplesSection = ({
     <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
         <div>
-          <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.event_videos_label[lang]}</p>
           <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.event_videos_title[lang]}</h2>
         </div>
         <div className="flex gap-3">
