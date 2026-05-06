@@ -238,6 +238,7 @@ const T = {
   },
   trusted_title: { ru: 'Нам Доверяют', en: 'Trusted By' },
   team_title: { ru: 'Наша Команда', en: 'Our Team' },
+  event_videos_label: { ru: 'Видео', en: 'Video' },
   event_videos_title: { ru: 'Видео примеры', en: 'Video examples' },
   event_videos: {
     ru: [
@@ -334,7 +335,7 @@ const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; o
           <a href="#process" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_process[lang]}</a>
           <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_details[lang]}</a>
           <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_team[lang]}</a>
-          <a href="#clients" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_clients[lang]}</a>
+          <a href="#reviews" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_clients[lang]}</a>
         </div>
       </motion.div>
     )}
@@ -401,12 +402,15 @@ const ListItem = ({ number, title, description }: { key?: number | string, numbe
 
 const ToggleSection = ({ title, content }: { key?: number | string, title: string, content: string[] }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const contentId = `toggle-${title.toLowerCase().replace(/[^a-zа-я0-9]+/gi, '-')}`;
+
   return (
     <div className="border-b border-black/10 py-6">
       <button
         type="button"
         className="flex w-full justify-between items-center group text-left"
         aria-expanded={isOpen}
+        aria-controls={contentId}
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3 className="font-serif-chronakis text-2xl group-hover:text-[#E83626] transition-colors">{title}</h3>
@@ -414,15 +418,21 @@ const ToggleSection = ({ title, content }: { key?: number | string, title: strin
           <ChevronDown className="w-6 h-6" />
         </motion.div>
       </button>
-      <motion.div 
-        initial={false}
-        animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
-        className="overflow-hidden"
-      >
-        <ul className="pt-6 font-sans-chronakis text-base leading-relaxed opacity-80 max-w-2xl list-disc pl-5 space-y-3">
-          {content.map((item, i) => <li key={i}>{item}</li>)}
-        </ul>
-      </motion.div>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            id={contentId}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <ul className="pt-6 font-sans-chronakis text-base leading-relaxed opacity-80 max-w-2xl list-disc pl-5 space-y-3">
+              {content.map((item, i) => <li key={i}>{item}</li>)}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -519,11 +529,11 @@ const CookieConsent = ({ lang }: { lang: Lang }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed left-4 right-4 bottom-4 md:left-auto md:right-6 md:bottom-6 md:max-w-xl z-[60] bg-[#2F241E] text-[#F3DACE] border border-[#D8B78F]/30 shadow-2xl p-5 md:p-6">
+    <div className="fixed left-3 right-3 bottom-3 md:left-auto md:right-6 md:bottom-6 md:max-w-xl z-[60] bg-[#2F241E] text-[#F3DACE] border border-[#D8B78F]/30 shadow-2xl p-4 md:p-6">
       <div className="font-sans-chronakis text-[10px] tracking-[0.28em] uppercase opacity-70 mb-3">
         {lang === 'ru' ? 'Cookies' : 'Cookies'}
       </div>
-      <p className="font-serif-chronakis text-base md:text-lg leading-relaxed mb-5">
+      <p className="font-serif-chronakis text-sm md:text-lg leading-relaxed mb-4 md:mb-5">
         {lang === 'ru'
           ? 'Мы используем cookies, чтобы сайт работал корректно, а также для улучшения его работы. Продолжая пользоваться сайтом, вы соглашаетесь с использованием cookies.'
           : 'We use cookies to keep the website working correctly and improve its experience. By continuing to use the website, you agree to our use of cookies.'}
@@ -531,10 +541,10 @@ const CookieConsent = ({ lang }: { lang: Lang }) => {
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <div className="flex flex-wrap gap-x-5 gap-y-2 font-sans-chronakis text-[10px] tracking-[0.16em] uppercase opacity-80">
           <a href="./cookie-policy.html" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">
-            {lang === 'ru' ? 'Правила cookies' : 'Cookie policy'}
+            {lang === 'ru' ? 'Cookies' : 'Cookie policy'}
           </a>
           <a href="./privacy.html" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">
-            {lang === 'ru' ? 'Персональные данные' : 'Privacy policy'}
+            {lang === 'ru' ? 'Данные' : 'Privacy policy'}
           </a>
         </div>
         <button
@@ -549,7 +559,7 @@ const CookieConsent = ({ lang }: { lang: Lang }) => {
   );
 };
 
-const YouTubeThumbnail = ({ videoId, title }: { videoId: string; title: string }) => {
+const YouTubeThumbnail = ({ videoId, title, priority = false }: { videoId: string; title: string; priority?: boolean }) => {
   const thumbnailSources = [
     `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`,
     `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
@@ -575,7 +585,8 @@ const YouTubeThumbnail = ({ videoId, title }: { videoId: string; title: string }
           useNextSource();
         }
       }}
-      loading="lazy"
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
       alt={title}
     />
@@ -597,7 +608,7 @@ const VideoExamplesSection = ({
     <div className="px-5 md:px-16 max-w-6xl mx-auto mb-10 md:mb-14">
       <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 md:gap-10 md:items-end">
         <div>
-          <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.menu_clients[lang]}</p>
+          <p className="font-sans-chronakis text-[10px] tracking-[0.35em] uppercase opacity-55 mb-4">{T.event_videos_label[lang]}</p>
           <h2 className="font-serif-chronakis text-4xl md:text-6xl leading-tight">{T.event_videos_title[lang]}</h2>
         </div>
         <div className="flex gap-3">
@@ -621,7 +632,7 @@ const VideoExamplesSection = ({
       </div>
     </div>
     <div ref={videoGalleryRef} className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory px-5 md:px-16 pb-4 hide-scrollbar scroll-smooth">
-      {T.event_videos[lang].map((video) => {
+      {T.event_videos[lang].map((video, index) => {
         const videoId = video.id.split('?')[0];
         return (
           <button
@@ -631,7 +642,7 @@ const VideoExamplesSection = ({
             className="snap-center shrink-0 w-[76vw] sm:w-[64vw] md:w-[46vw] lg:w-[38vw] aspect-video bg-black overflow-hidden relative group text-left"
             onClick={() => onSelectVideo(video.id)}
           >
-            <YouTubeThumbnail videoId={videoId} title={video.title} />
+            <YouTubeThumbnail videoId={videoId} title={video.title} priority={index < 2} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F3DACE] text-black flex items-center justify-center pl-1 shadow-lg group-hover:scale-105 transition-transform">
@@ -911,7 +922,15 @@ export default function YuryEventPage() {
               {teamMembers[lang].map((guide, i) => (
                  <div key={i} className="group cursor-pointer flex flex-col items-center text-center">
                     <div className="w-56 h-56 md:w-72 md:h-72 overflow-hidden mb-6 md:mb-8 border border-black/10 relative rounded-full bg-[#F3DACE] shadow-sm">
-                       <img src={guide.photo} alt={guide.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                       <img
+                         src={guide.photo}
+                         alt={guide.name}
+                         loading="eager"
+                         decoding="async"
+                         width="288"
+                         height="288"
+                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                       />
                     </div>
                     <h3 className="font-sans-chronakis font-bold text-lg tracking-widest uppercase mb-2">{guide.name}</h3>
                     <p className="font-serif-chronakis italic opacity-70 mb-4 text-[16px]">{guide.role}</p>
@@ -990,7 +1009,12 @@ export default function YuryEventPage() {
             exit={{ opacity: 0 }}
             onClick={() => setActiveVideo(null)}
           >
-            <button className="absolute top-6 right-6 text-white hover:text-[#E83626] transition-colors" onClick={() => setActiveVideo(null)}>
+            <button
+              type="button"
+              aria-label={lang === 'ru' ? 'Закрыть видео' : 'Close video'}
+              className="absolute top-6 right-6 text-white hover:text-[#E83626] transition-colors"
+              onClick={() => setActiveVideo(null)}
+            >
               <X className="w-10 h-10" />
             </button>
             <div className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl relative cursor-default" onClick={e => e.stopPropagation()}>
