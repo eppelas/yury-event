@@ -281,6 +281,56 @@ const trustedLogos = [
   { name: 'Zerocoder', src: './company-logos/zerocoder.svg' },
 ];
 
+const LanguageFlags = ({
+  lang,
+  setLang,
+  variant = 'header',
+}: {
+  lang: Lang;
+  setLang: (v: Lang) => void;
+  variant?: 'header' | 'menu';
+}) => {
+  const isMenu = variant === 'menu';
+  const languages: Array<{ value: Lang; flag: string; label: string }> = [
+    { value: 'ru', flag: '🇷🇺', label: 'Русская версия' },
+    { value: 'en', flag: '🇬🇧', label: 'English version' },
+  ];
+
+  return (
+    <div
+      className={`inline-flex items-center rounded-full border ${
+        isMenu ? 'border-[#F3DACE]/45 bg-[#F3DACE]/10 p-1' : 'border-black/20 bg-black/5 p-0.5'
+      }`}
+      aria-label={lang === 'ru' ? 'Выбор языка' : 'Language selection'}
+    >
+      {languages.map((item) => {
+        const isActive = lang === item.value;
+
+        return (
+          <button
+            key={item.value}
+            type="button"
+            onClick={() => setLang(item.value)}
+            aria-label={item.label}
+            aria-pressed={isActive}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-lg transition-all md:h-10 md:w-10 ${
+              isActive
+                ? isMenu
+                  ? 'bg-[#F3DACE] shadow-sm'
+                  : 'bg-white shadow-sm'
+                : isMenu
+                  ? 'opacity-65 hover:opacity-100'
+                  : 'opacity-55 hover:opacity-100'
+            }`}
+          >
+            <span aria-hidden="true">{item.flag}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lang) => void, setIsMenuOpen: (v: boolean) => void }) => (
   <header className="fixed top-0 left-0 right-0 z-40 grid grid-cols-[minmax(0,1fr)_auto] items-center px-4 py-4 md:px-8 md:py-6 bg-[#F3DACE] border-b border-black/10 gap-3 md:gap-4">
     <div className="min-w-0 font-sans-chronakis text-[10px] md:text-xs tracking-[0.14em] md:tracking-[0.2em] font-bold uppercase leading-tight max-w-[10.5rem] md:max-w-none">
@@ -290,14 +340,7 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
       <div className="hidden md:flex gap-8 font-sans-chronakis text-xs tracking-widest font-medium uppercase items-center">
         <a href="https://t.me/chikhalov2" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity">{T.contact[lang]}</a>
       </div>
-      <button
-        type="button"
-        onClick={() => setLang(lang === 'ru' ? 'en' : 'ru')} 
-        aria-label={lang === 'ru' ? 'Switch to English' : 'Переключить на русский'}
-        className="font-sans-chronakis text-xs tracking-widest font-bold uppercase hover:opacity-60 transition-opacity border-b border-black pb-0.5 w-6 text-center"
-      >
-        {lang === 'ru' ? 'EN' : 'RU'}
-      </button>
+      <LanguageFlags lang={lang} setLang={setLang} />
       <button
         type="button"
         onClick={() => setIsMenuOpen(true)}
@@ -310,7 +353,7 @@ const Header = ({ lang, setLang, setIsMenuOpen }: { lang: Lang, setLang: (v: Lan
   </header>
 );
 
-const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; onClose: () => void }) => (
+const MenuOverlay = ({ lang, setLang, isOpen, onClose }: { lang: Lang, setLang: (v: Lang) => void; isOpen: boolean; onClose: () => void }) => (
   <AnimatePresence>
     {isOpen && (
       <motion.div 
@@ -334,6 +377,9 @@ const MenuOverlay = ({ lang, isOpen, onClose }: { lang: Lang, isOpen: boolean; o
           <a href="#details" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_details[lang]}</a>
           <a href="#team" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_team[lang]}</a>
           <a href="#reviews" onClick={onClose} className="hover:opacity-60 transition-transform hover:scale-105">{T.menu_clients[lang]}</a>
+          <div className="pt-2">
+            <LanguageFlags lang={lang} setLang={setLang} variant="menu" />
+          </div>
         </div>
       </motion.div>
     )}
@@ -691,7 +737,7 @@ export default function YuryEventPage() {
     <div ref={containerRef} className="h-screen overflow-y-scroll overflow-x-hidden bg-[#F3DACE] text-black selection:bg-black selection:text-[#F3DACE] hide-scrollbar relative">
       <ChronakisStyles />
       <Header lang={lang} setLang={setLang} setIsMenuOpen={setIsMenuOpen} />
-      <MenuOverlay lang={lang} isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <MenuOverlay lang={lang} setLang={setLang} isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
       {/* Sidebar Pattern */}
       <div className="fixed left-0 top-0 bottom-0 w-8 md:w-12 border-r border-black/10 dotted-pattern z-30 hidden md:block pointer-events-none" />
