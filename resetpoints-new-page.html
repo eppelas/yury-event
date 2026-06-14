@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Authentic experiences, tailor-made for your company | Resetpoints</title>
+    <meta
+      name="description"
+      content="Authentic company retreats designed around your real business challenge: trust, collaboration, strategic clarity, leadership alignment, and energy recovery."
+    />
+    <meta property="og:title" content="Authentic experiences, tailor-made for your company" />
+    <meta property="og:description" content="A retreat that solves your real challenge." />
+    <meta property="og:image" content="https://resetpoints.com/process-original.jpg" />
+    <meta name="theme-color" content="#F3DACE" />
+    <link rel="icon" type="image/svg+xml" href="https://resetpoints.com/favicon.svg" />
+    <link rel="stylesheet" href="./assets/resetpoints-original.css" />
+    <script>
+      (() => {
+        const replacements = new Map([
+          [
+            "Creating an authentic event\nfor your company",
+            "Authentic experiences, tailor-made for your company",
+          ],
+          ["Creating an authentic event for your company", "Authentic experiences, tailor-made for your company"],
+          [
+            "Increase trust within the team, improve the quality of work communications. Unite key players.",
+            "Strengthen team trust, enhance collaboration, and align your key players.",
+          ],
+          [
+            "Return inspiration to create together, find answers to questions that cannot be solved in the office.",
+            "Bring back the inspiration to create together, and find answers to questions that cannot be solved inside the office.",
+          ],
+          ["Business outcomes we design for", "Outcomes we design for your business"],
+          [
+            "Before designing the program, we define the shift the company needs. The format, venue, rhythm, facilitation, and activities follow that question.",
+            "Before designing the program, we define the shift your company needs. The format, venue, rhythm, facilitation, and activities all stem from that core need.",
+          ],
+          [
+            "Shape vision, priorities, and decisions that are hard to reach inside daily operations.",
+            "Shape vision, priorities, and decisions that are difficult to achieve within day-to-day operations.",
+          ],
+          [
+            "Align expectations, roles, ownership, and agreements between key people.",
+            "Align expectations, roles, ownership, and agreements among key players.",
+          ],
+          [
+            "Reduce tension, restore real contact, and create space for honest conversations.",
+            "Reduce tension, restore genuine connection, and create space for honest conversations.",
+          ],
+          [
+            "Give the team a powerful experience, a change of context, and energy for the next cycle.",
+            "Give the team a powerful experience - a change of scenery and renewed energy for the next cycle.",
+          ],
+          ["Formats tailored to your goal", "Formats tailored to your team"],
+          [
+            "We do not sell one fixed retreat. We shape the format, rhythm, and depth around your team: from strategic reset to intimate offsites for key people.",
+            "We don't offer a one-size-fits-all retreat. Instead, we shape the format, rhythm, and depth around your team - from a strategic reset to an intimate offsite for your key players.",
+          ],
+          [
+            "Built to restore trust, bring back real communication, and help people feel like one team again instead of a set of functions.",
+            "Designed to restore trust, bring back genuine communication, and help people feel like one team again - not just a set of functions.",
+          ],
+          ["The design itself creates the result", "Great results come from precise design"],
+          [
+            "What makes it effective is not the number of activities, but the design itself: the right question, the right rhythm, and a space where the team can both think and recover.",
+            "Effectiveness doesn't come from the number of activities, but from precision: the right question, the right rhythm, and a space where the team can both think and recharge.",
+          ],
+          ["Not activity overload", "Not activities for activities' sake"],
+          [
+            "Question, rhythm, environment, and execution work as one system.",
+            "The client's need, rhythm, space, and facilitation work as one system.",
+          ],
+          ["We start with the business question", "We start with the client's need."],
+          [
+            "First we define what should change after the retreat: decisions, communication, trust, strategy, or the state of the team.",
+            "First, we define what needs to change after the retreat: decisions, communication, trust, strategy, or the overall state of the team.",
+          ],
+          ["We take care of execution", "We take care of everything behind the scenes."],
+          [
+            "Logistics, venue, transitions, accommodation, and on-site coordination are handled for you so leaders can stay inside the process.",
+            "Logistics, venue, transitions, accommodation, and on-site coordination are managed for you - allowing leaders to remain fully engaged in the process.",
+          ],
+          ["We start with an interview and define the real request.", "We start with an interview and define the real client's need."],
+          ["Transfer, food, and turn-key organization.", "Transfer, meals, and full-service coordination."],
+        ]);
+
+        const normalize = (value) => value.replace(/\s+/g, " ").trim();
+        const normalized = new Map(Array.from(replacements, ([from, to]) => [normalize(from), to]));
+
+        const replaceNodeText = (node) => {
+          const exact = replacements.get(node.nodeValue);
+          const relaxed = normalized.get(normalize(node.nodeValue));
+          const text = normalize(node.nodeValue);
+          let nextValue = exact || relaxed;
+          if (!nextValue && text.includes("shape a retreat around your business question")) {
+            nextValue = "A retreat that solves your real challenge";
+          }
+          if (!nextValue && text === "RETREAT") {
+            nextValue = "YOUR RETREAT";
+          }
+          if (!nextValue && text.includes("Schedule a call with our manager") && text.includes("free of charge")) {
+            nextValue = "Schedule a call with our manager to discuss your needs. We'll create a custom event scenario for you - free of charge.";
+          }
+          if (nextValue && node.nodeValue !== nextValue) {
+            node.nodeValue = nextValue;
+          }
+        };
+
+        const replaceText = () => {
+          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+          const nodes = [];
+          while (walker.nextNode()) nodes.push(walker.currentNode);
+          nodes.forEach(replaceNodeText);
+
+          const heroTitle = document.querySelector("h1");
+          if (
+            heroTitle &&
+            normalize(heroTitle.textContent).includes("Creating an authentic event") &&
+            normalize(heroTitle.textContent).includes("for your company")
+          ) {
+            heroTitle.textContent = "Authentic experiences, tailor-made for your company";
+          }
+        };
+
+        const observer = new MutationObserver(replaceText);
+        document.addEventListener("DOMContentLoaded", () => {
+          observer.observe(document.body, { childList: true, characterData: true, subtree: true });
+          replaceText();
+          window.setTimeout(replaceText, 250);
+          window.setTimeout(replaceText, 1000);
+        });
+      })();
+    </script>
+    <script defer src="./assets/resetpoints-english.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
