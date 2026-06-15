@@ -3,75 +3,503 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="https://resetpoints.com/" />
     <title>Authentic experiences, tailor-made for your company | Resetpoints</title>
-    <meta name="description" content="Authentic company retreats designed around your real business challenge: trust, collaboration, strategic clarity, leadership alignment, and energy recovery." />
+    <meta
+      name="description"
+      content="Authentic company retreats designed around your real business challenge: trust, collaboration, strategic clarity, leadership alignment, and energy recovery."
+    />
     <meta property="og:title" content="Authentic experiences, tailor-made for your company" />
     <meta property="og:description" content="A retreat that solves your real challenge." />
     <meta property="og:image" content="https://resetpoints.com/process-original.jpg" />
-    <meta name="theme-color" content="#F3DACE" />
+    <meta name="theme-color" content="#fff7ee" />
     <link rel="icon" type="image/svg+xml" href="https://resetpoints.com/favicon.svg" />
-    <link rel="stylesheet" crossorigin href="https://resetpoints.com/assets/index-CqNYieEv.css" />
-    <script>
-      (() => {
-        const visibleUrl = window.location.href;
-        history.replaceState(null, document.title, "/en");
-        window.addEventListener("load", () => setTimeout(() => history.replaceState(null, document.title, visibleUrl), 100));
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #18130f;
+        --muted: #675b51;
+        --paper: #fff8ef;
+        --panel: #ffffff;
+        --line: rgba(24, 19, 15, 0.13);
+        --accent: #ef5d2a;
+        --accent-dark: #b83d1a;
+        --sage: #6f8b77;
+        --blue: #31506c;
+      }
 
-        const pairs = new Map([
-          ["Creating an authentic event for your company", "Authentic experiences, tailor-made for your company"],
-          ["Increase trust within the team, improve the quality of work communications. Unite key players.", "Strengthen team trust, enhance collaboration, and align your key players."],
-          ["Return inspiration to create together, find answers to questions that cannot be solved in the office.", "Bring back the inspiration to create together, and find answers to questions that cannot be solved inside the office."],
-          ["Business outcomes we design for", "Outcomes we design for your business"],
-          ["Before designing the program, we define the shift the company needs. The format, venue, rhythm, facilitation, and activities follow that question.", "Before designing the program, we define the shift your company needs. The format, venue, rhythm, facilitation, and activities all stem from that core need."],
-          ["Shape vision, priorities, and decisions that are hard to reach inside daily operations.", "Shape vision, priorities, and decisions that are difficult to achieve within day-to-day operations."],
-          ["Align expectations, roles, ownership, and agreements between key people.", "Align expectations, roles, ownership, and agreements among key players."],
-          ["Reduce tension, restore real contact, and create space for honest conversations.", "Reduce tension, restore genuine connection, and create space for honest conversations."],
-          ["Give the team a powerful experience, a change of context, and energy for the next cycle.", "Give the team a powerful experience - a change of scenery and renewed energy for the next cycle."],
-          ["Formats tailored to your goal", "Formats tailored to your team"],
-          ["We do not sell one fixed retreat. We shape the format, rhythm, and depth around your team: from strategic reset to intimate offsites for key people.", "We don't offer a one-size-fits-all retreat. Instead, we shape the format, rhythm, and depth around your team - from a strategic reset to an intimate offsite for your key players."],
-          ["Built to restore trust, bring back real communication, and help people feel like one team again instead of a set of functions.", "Designed to restore trust, bring back genuine communication, and help people feel like one team again - not just a set of functions."],
-          ["The design itself creates the result", "Great results come from precise design"],
-          ["What makes it effective is not the number of activities, but the design itself: the right question, the right rhythm, and a space where the team can both think and recover.", "Effectiveness doesn't come from the number of activities, but from precision: the right question, the right rhythm, and a space where the team can both think and recharge."],
-          ["Not activity overload", "Not activities for activities' sake"],
-          ["Question, rhythm, environment, and execution work as one system.", "The client's need, rhythm, space, and facilitation work as one system."],
-          ["We start with the business question", "We start with the client's need."],
-          ["First we define what should change after the retreat: decisions, communication, trust, strategy, or the state of the team.", "First, we define what needs to change after the retreat: decisions, communication, trust, strategy, or the overall state of the team."],
-          ["We take care of execution", "We take care of everything behind the scenes."],
-          ["Logistics, venue, transitions, accommodation, and on-site coordination are handled for you so leaders can stay inside the process.", "Logistics, venue, transitions, accommodation, and on-site coordination are managed for you - allowing leaders to remain fully engaged in the process."],
-          ["We start with an interview and define the real request.", "We start with an interview and define the real client's need."],
-          ["Transfer, food, and turn-key organization.", "Transfer, meals, and full-service coordination."]
-        ]);
-        const normalize = (value) => value.replace(/\s+/g, " ").trim();
-        const normalized = new Map(Array.from(pairs, ([from, to]) => [normalize(from), to]));
-        const replaceText = () => {
-          const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-          const nodes = [];
-          while (walker.nextNode()) nodes.push(walker.currentNode);
-          for (const node of nodes) {
-            const text = normalize(node.nodeValue);
-            let nextValue = normalized.get(text);
-            if (!nextValue && text.includes("shape a retreat around your business question")) nextValue = "A retreat that solves your real challenge";
-            if (!nextValue && text === "RETREAT") nextValue = "YOUR RETREAT";
-            if (!nextValue && text.includes("Schedule a call with our manager") && text.includes("free of charge")) nextValue = "Schedule a call with our manager to discuss your needs. We'll create a custom event scenario for you - free of charge.";
-            if (nextValue && node.nodeValue !== nextValue) node.nodeValue = nextValue;
-          }
-          const heroTitle = document.querySelector("h1");
-          if (heroTitle && normalize(heroTitle.textContent).includes("Creating an authentic event") && normalize(heroTitle.textContent).includes("for your company")) {
-            heroTitle.textContent = "Authentic experiences, tailor-made for your company";
-          }
-        };
-        document.addEventListener("DOMContentLoaded", () => {
-          new MutationObserver(replaceText).observe(document.body, { childList: true, characterData: true, subtree: true });
-          replaceText();
-          setTimeout(replaceText, 300);
-          setTimeout(replaceText, 1200);
-        });
-      })();
-    </script>
-    <script type="module" crossorigin src="https://resetpoints.com/assets/index-DxR5Mqo5.js"></script>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px clamp(18px, 4vw, 54px);
+        border-bottom: 1px solid rgba(24, 19, 15, 0.08);
+        background: rgba(255, 248, 239, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+      }
+
+      .hero {
+        min-height: 92svh;
+        display: grid;
+        align-items: end;
+        padding: clamp(64px, 9vw, 120px) clamp(18px, 4vw, 54px) clamp(38px, 6vw, 76px);
+        background:
+          linear-gradient(90deg, rgba(255, 248, 239, 0.96) 0%, rgba(255, 248, 239, 0.83) 43%, rgba(255, 248, 239, 0.24) 100%),
+          url("https://resetpoints.com/process-original.jpg") center / cover;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-inner {
+        width: min(1120px, 100%);
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 980px;
+        margin-bottom: 22px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(48px, 8vw, 112px);
+        line-height: 0.96;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin-bottom: 30px;
+        color: #3f352e;
+        font-size: clamp(18px, 2vw, 24px);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--ink);
+        padding: 12px 18px;
+        background: var(--ink);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+
+      main {
+        overflow: hidden;
+      }
+
+      section {
+        padding: clamp(54px, 7vw, 96px) clamp(18px, 4vw, 54px);
+      }
+
+      .section-inner {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: clamp(26px, 6vw, 72px);
+        align-items: start;
+      }
+
+      h2 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(34px, 5vw, 68px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .section-copy {
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .card {
+        min-height: 190px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .card strong {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--accent-dark);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+        font-size: 22px;
+        line-height: 1.16;
+      }
+
+      .card p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .band {
+        background: #15110e;
+        color: #fff8ef;
+      }
+
+      .band .section-copy,
+      .band .card p {
+        color: rgba(255, 248, 239, 0.74);
+      }
+
+      .band .card {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+
+      .band .card strong {
+        color: #ff9a69;
+      }
+
+      .process {
+        display: grid;
+        gap: 14px;
+        counter-reset: step;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+        padding: 22px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .step::before {
+        counter-increment: step;
+        content: counter(step, decimal-leading-zero);
+        color: var(--accent);
+        font-weight: 800;
+      }
+
+      .step h3 {
+        margin-bottom: 6px;
+        font-size: 24px;
+      }
+
+      .step p {
+        margin-bottom: 0;
+        color: var(--muted);
+      }
+
+      .formats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .format {
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .format:nth-child(2) {
+        background: #edf3ef;
+      }
+
+      .format ul {
+        margin: 18px 0 0;
+        padding-left: 20px;
+        color: var(--muted);
+      }
+
+      .cta {
+        background: linear-gradient(135deg, #fff4e6, #edf3ef);
+      }
+
+      .cta-box {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: end;
+        padding: clamp(28px, 5vw, 52px);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      footer {
+        padding: 28px clamp(18px, 4vw, 54px);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (max-width: 900px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+        }
+
+        .split,
+        .cta-box {
+          grid-template-columns: 1fr;
+        }
+
+        .grid,
+        .formats {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: 86svh;
+          background:
+            linear-gradient(180deg, rgba(255, 248, 239, 0.98), rgba(255, 248, 239, 0.72)),
+            url("https://resetpoints.com/process-original.jpg") center / cover;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <header class="nav">
+      <div class="brand">Resetpoints</div>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#outcomes">Outcomes</a>
+        <a href="#formats">Formats</a>
+        <a href="#process">Process</a>
+        <a href="#call">Call</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">Strategy & Team Retreats</p>
+          <h1>Authentic experiences, tailor-made for your company</h1>
+          <p class="lead">
+            A retreat designed around your real business challenge: trust, collaboration, strategic clarity, leadership
+            alignment, and energy recovery.
+          </p>
+          <div class="actions">
+            <a class="button" href="mailto:hello@resetpoints.com?subject=Resetpoints%20retreat%20request">Schedule a call</a>
+            <a class="button secondary" href="#outcomes">Explore outcomes</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="outcomes">
+        <div class="section-inner split">
+          <div>
+            <p class="eyebrow">Designed For Change</p>
+            <h2>Outcomes we design for your business</h2>
+          </div>
+          <div>
+            <p class="section-copy">
+              Before designing the program, we define the shift your company needs. The format, venue, rhythm,
+              facilitation, and activities all stem from that core need.
+            </p>
+            <div class="grid">
+              <article class="card">
+                <strong>Trust</strong>
+                <h3>Team trust</h3>
+                <p>Strengthen team trust, enhance collaboration, and align your key players.</p>
+              </article>
+              <article class="card">
+                <strong>Clarity</strong>
+                <h3>Strategic clarity</h3>
+                <p>Shape vision, priorities, and decisions that are difficult to reach in daily operations.</p>
+              </article>
+              <article class="card">
+                <strong>Alignment</strong>
+                <h3>Leadership alignment</h3>
+                <p>Align expectations, roles, ownership, and agreements among key players.</p>
+              </article>
+              <article class="card">
+                <strong>Energy</strong>
+                <h3>Energy recovery</h3>
+                <p>Give the team a change of scenery and renewed energy for the next cycle.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="formats">
+        <div class="section-inner split">
+          <div>
+            <p class="eyebrow">Tailored Formats</p>
+            <h2>Formats tailored to your team</h2>
+          </div>
+          <div>
+            <p class="section-copy">
+              We do not offer a one-size-fits-all retreat. We shape the format, rhythm, and depth around your team,
+              from a strategic reset to an intimate offsite for key players.
+            </p>
+            <div class="formats">
+              <article class="format">
+                <div>
+                  <strong>Team Retreat</strong>
+                  <h3>Restore contact and collaboration</h3>
+                  <p>For teams that need trust, communication, and a shared sense of direction.</p>
+                </div>
+                <ul>
+                  <li>Team dynamics work</li>
+                  <li>Shared agreements</li>
+                  <li>Energy recovery</li>
+                </ul>
+              </article>
+              <article class="format">
+                <div>
+                  <strong>Strategy Retreat</strong>
+                  <h3>Align decisions and priorities</h3>
+                  <p>For leadership teams that need clarity on strategy, trade-offs, and ownership.</p>
+                </div>
+                <ul>
+                  <li>Vision and strategy</li>
+                  <li>6-12 month priorities</li>
+                  <li>Key decisions</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process">
+        <div class="section-inner split">
+          <div>
+            <p class="eyebrow">Precise Design</p>
+            <h2>Great results come from precise design</h2>
+          </div>
+          <div class="process">
+            <article class="step">
+              <div>
+                <h3>We start with the client's need</h3>
+                <p>First, we define what needs to change after the retreat: decisions, communication, trust, strategy, or team state.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>We design the rhythm</h3>
+                <p>The client's need, rhythm, space, and facilitation work as one system.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>We take care of execution</h3>
+                <p>Logistics, venue, transitions, accommodation, and on-site coordination are managed for you.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div>
+                <h3>We guide the process on-site</h3>
+                <p>Leaders can remain fully engaged while the team moves through the designed experience.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" id="call">
+        <div class="section-inner cta-box">
+          <div>
+            <p class="eyebrow">Your Retreat</p>
+            <h2>A retreat that solves your real challenge</h2>
+            <p class="section-copy">
+              Schedule a call with our manager to discuss your needs. We will create a custom event scenario for you,
+              free of charge.
+            </p>
+          </div>
+          <a class="button" href="mailto:hello@resetpoints.com?subject=Resetpoints%20retreat%20request">Schedule a call</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>Resetpoints | Authentic retreats for companies</footer>
   </body>
 </html>
